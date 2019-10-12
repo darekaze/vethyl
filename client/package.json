@@ -1,5 +1,5 @@
 {
-  "name": "vql-client",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,7 +10,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
-    "typescript": "3.6.4"
+    "typescript": "~3.6.4"
   },
   "scripts": {
     "dev": "react-scripts start",
