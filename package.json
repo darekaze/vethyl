@@ -40,7 +40,7 @@
   "jest": {
     "projects": [
       "client",
-      "server"
+      "api"
     ]
   },
   "prettier": {
@@ -65,6 +65,6 @@
   },
   "workspaces": [
     "client",
-    "server"
+    "api"
   ]
 }

@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "lib": ["es6", "es7", "es2017", "es2018", "dom"],
-    "module": "commonjs",
     "target": "es6",
+    "lib": ["es6", "es7", "es2017", "es2018", "dom"],
+    "module": "esnext",
     "moduleResolution": "node",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -10,6 +10,7 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
