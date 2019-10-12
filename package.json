@@ -1,0 +1,70 @@
+{
+  "private": true,
+  "name": "vql-stack",
+  "version": "0.1.0",
+  "description": "Project VQL monorepo",
+  "repository": "darekaze/vql-stack",
+  "author": "@DaRekaze",
+  "license": "Apache-2.0",
+  "scripts": {
+    "_start": "",
+    "_dev": "yarn workspaces run dev",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.ts",
+    "ws:api": "yarn workspace api",
+    "ws:www": "yarn workspace client",
+    "api:dev": "yarn workspace api dev",
+    "client:dev": "yarn workspace client dev"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.0",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.19.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "typescript": "~3.6.4"
+  },
+  "jest": {
+    "projects": [
+      "client",
+      "server"
+    ]
+  },
+  "prettier": {
+    "printWidth": 85,
+    "semi": false,
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "trailingComma": "es5",
+    "endOfLine": "lf"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ]
+}
