@@ -11,10 +11,10 @@
     "_dev": "yarn workspaces run dev",
     "test": "jest",
     "lint": "eslint . --ext .js,.ts,.tsx",
-    "ws:a": "yarn workspace api",
-    "ws:c": "yarn workspace client",
-    "a:dev": "yarn workspace api dev",
-    "c:dev": "yarn workspace client dev"
+    "wsa": "yarn workspace api",
+    "wsc": "yarn workspace client",
+    "adev": "yarn workspace api dev",
+    "cdev": "yarn workspace client dev"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
