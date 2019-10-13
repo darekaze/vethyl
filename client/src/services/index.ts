@@ -1,4 +1,5 @@
 import { create } from 'apisauce'
+import apiMonitor from './monitor'
 
 const api = create({
   baseURL:
@@ -10,5 +11,7 @@ const api = create({
     'Content-Type': 'application/json; charset=utf-8',
   },
 })
+
+api.addMonitor(apiMonitor)
 
 export default api
