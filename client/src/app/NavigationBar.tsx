@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, MouseEvent } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Container, Menu, Segment, MenuItemProps } from 'semantic-ui-react'
 
@@ -6,10 +6,7 @@ const NavigationBar: React.FC = () => {
   const [activeItem, setActiveItem] = useState('')
   const history = useHistory()
 
-  const handleItemClick = (
-    e: React.MouseEvent,
-    { name = '' }: MenuItemProps
-  ): void => {
+  const handleItemClick = (e: MouseEvent, { name = '' }: MenuItemProps): void => {
     setActiveItem(name)
     history.push(`/${name}`)
   }
