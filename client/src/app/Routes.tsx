@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Home, EthTransaction, EthBlock, EthBalance } from '../views'
+import { Home, EthTransaction, EthBlock, EthBalance } from '../view'
 
 const Routes: React.FC = () => {
   return (
