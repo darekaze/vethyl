@@ -6,6 +6,7 @@
     "easy-peasy": "^3.1.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-hook-form": "^3.24.0",
     "react-router-dom": "^5.1.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1"
