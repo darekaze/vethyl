@@ -4,16 +4,23 @@
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
+    "prettier/react"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier", "jest"],
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts"]
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
-      "typescript": {}
+      "typescript": {
+        "alwaysTryTypes": true,
+        "directory": [
+          "./tsconfig.json",
+          "./client/tsconfig.json"
+        ]
+      }
     }
   },
   "rules": {
@@ -23,7 +30,9 @@
       { "devDependencies": ["**/test.ts", "tsnode.js"] }
     ],
     "import/prefer-default-export": "off",
+    "react/prop-types": ["off"],
     "react/jsx-filename-extension": ["off"],
+    "react/jsx-curly-brace-presence": ["off"],
     "react/jsx-closing-bracket-location": [
       "warn",
       { "nonEmpty": "after-props" }
