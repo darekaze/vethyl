@@ -1,4 +1,4 @@
-import React, { useRef, ReactNode } from 'react'
+import React, { useState, useRef, ReactNode } from 'react'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import { DayPickerInputProps, DayPickerProps } from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
@@ -32,8 +32,6 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       toRef.current.getInput().focus()
     }
   }
-
-  console.log(startDate, endDate)
 
   return (
     <div className="InputFromTo">
