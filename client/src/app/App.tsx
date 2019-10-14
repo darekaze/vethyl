@@ -1,7 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { StoreProvider } from 'easy-peasy'
-import { Routes, NavigationBar, store } from '.'
+import NavigationBar from './NavigationBar'
+import Routes from './Routes'
+import store from './store'
 
 const App: React.FC = () => {
   return (
