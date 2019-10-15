@@ -1,4 +1,5 @@
 import React, { useState, useRef, ReactNode } from 'react'
+import dayjs from 'dayjs'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import { DayPickerInputProps, DayPickerProps } from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
@@ -8,24 +9,45 @@ import './style.css'
 
 interface DateRangePickerProps {
   children?: ReactNode
-  getFormValues: Function // useForm types
-  handleFromChange: DayPickerInputProps['onDayChange']
-  handleToChange: DayPickerInputProps['onDayChange']
+  fromDate?: Date
+  toDate?: Date
+  onFormChange: (
+    name: string,
+    value: unknown,
+    shouldValidate?: boolean | undefined
+  ) => void | Promise<boolean>
 }
 
 const FORMAT = 'MM/DD/YYYY'
 
 const DateRangePicker: React.FC<DateRangePickerProps> = ({
-  getFormValues,
-  handleFromChange,
-  handleToChange,
+  onFormChange,
+  fromDate,
+  toDate,
 }) => {
-  // TODO: put local state
-  // TODO: refactor using https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/
+  const [from, setFrom] = useState<Date>(fromDate as Date)
+  const [to, setTo] = useState<Date>(toDate as Date)
   const toRef = useRef<DayPickerInput>(null)
 
-  const { startDate, endDate } = getFormValues()
-  const modifiers = { start: startDate, end: endDate }
+  const modifiers = { start: from, end: to }
+
+  const showFromMonth = (): void => {
+    if (!from) return
+    if (toRef && toRef.current && dayjs(to).diff(dayjs(from), 'month') < 2) {
+      toRef.current.getDayPicker().showMonth(from)
+    }
+  }
+
+  const handleFromChange: DayPickerInputProps['onDayChange'] = startDate => {
+    setFrom(startDate)
+    onFormChange('startDate', startDate)
+  }
+
+  const handleToChange: DayPickerInputProps['onDayChange'] = endDate => {
+    setTo(endDate)
+    onFormChange('endDate', endDate)
+    showFromMonth()
+  }
 
   const onDayClick: DayPickerProps['onDayClick'] = () => {
     if (toRef && toRef.current) {
@@ -36,15 +58,15 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   return (
     <div className="InputFromTo">
       <DayPickerInput
-        value={startDate}
+        value={from}
         placeholder="From"
         format={FORMAT}
         formatDate={formatDate}
         parseDate={parseDate}
         dayPickerProps={{
-          selectedDays: [startDate, { startDate, endDate }],
-          disabledDays: { after: endDate },
-          toMonth: endDate,
+          selectedDays: [from, { from, to }],
+          disabledDays: { after: to },
+          toMonth: to,
           modifiers,
           numberOfMonths: 2,
           onDayClick,
@@ -55,17 +77,17 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       <span className="InputFromTo-to">
         <DayPickerInput
           ref={toRef}
-          value={endDate}
+          value={to}
           placeholder="To"
           format={FORMAT}
           formatDate={formatDate}
           parseDate={parseDate}
           dayPickerProps={{
-            selectedDays: [startDate, { startDate, endDate }],
-            disabledDays: { before: startDate },
+            selectedDays: [from, { from, to }],
+            disabledDays: { before: from },
             modifiers,
-            month: startDate,
-            fromMonth: startDate,
+            month: from,
+            fromMonth: from,
             numberOfMonths: 2,
           }}
           onDayChange={handleToChange}

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Container, Header, Form, StrictInputProps } from 'semantic-ui-react'
 import useForm from 'react-hook-form'
-import { DayPickerInputProps } from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
 
 import DateRangePicker from 'components/shared/DateRangePicker'
@@ -18,19 +17,11 @@ interface FormData {
 }
 
 const EthTransaction: React.FC = () => {
-  const { register, handleSubmit, setValue, getValues } = useForm<FormData>()
+  const { register, handleSubmit, setValue } = useForm<FormData>()
   const queryResult = useStoreState(state => state.transaction.payload)
 
   const handleChange: StrictInputProps['onChange'] = (e, { name, value }): void => {
     setValue(name, value)
-  }
-
-  const handleFromChange: DayPickerInputProps['onDayChange'] = (day): void => {
-    setValue('startDate', day)
-  }
-
-  const handleToChange: DayPickerInputProps['onDayChange'] = (day): void => {
-    setValue('endDate', day)
   }
 
   const onSubmit = handleSubmit(data => {
@@ -49,11 +40,10 @@ const EthTransaction: React.FC = () => {
       <Header as="h1">Check Transaction</Header>
       <Form onSubmit={onSubmit}>
         {/* Can put date range picker in one component? */}
-        <DateRangePicker
-          getFormValues={getValues}
-          handleFromChange={handleFromChange}
-          handleToChange={handleToChange}
-        />
+        <Form.Field>
+          <label>Range of Date</label>
+          <DateRangePicker onFormChange={setValue} />
+        </Form.Field>
         <Form.Group widths="equal">
           <Form.Input
             name="fromAcct"
