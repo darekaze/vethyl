@@ -24,11 +24,13 @@
     }
   },
   "rules": {
+    "class-methods-use-this": "off",
+    "no-useless-constructor": "off",
     "prettier/prettier": "warn",
     "import/prefer-default-export": ["off"],
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/test.ts"] }
+      { "devDependencies": ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}", "**/*.e2e-spec.{ts,tsx}"] }
     ],
     "react/prop-types": ["off"],
     "react/jsx-filename-extension": ["off"],
@@ -40,7 +42,8 @@
     "jsx-a11y/label-has-associated-control": ["off"],
     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/camelcase": "off"
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": "off"
   },
   "env": {
     "node": true,

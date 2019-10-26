@@ -9,10 +9,12 @@
     ],
     "module": "esnext",
     "moduleResolution": "node",
+    "isolatedModules": true,
     "strict": true,
     "noEmit": true,
     "jsx": "react",
     "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,9 +1,0 @@
-node_modules
-.git
-.cache
-.vscode
-dist
-build
-*.md
-*.log
-.env*

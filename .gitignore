@@ -7,6 +7,7 @@ node_modules/
 
 # testing
 coverage/
+.nyc_output/
 
 # production
 build/
@@ -19,17 +20,28 @@ dist/
 .env.test.local
 .env.production.local
 
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# vscode
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
 
 # Environment Variables
 .env
 .env.development
 .env.production
 .env.build
-
-# vscode
-.vscode/*
-!.vscode/launch.json
-!.vscode/settings.json
