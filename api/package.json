@@ -1,0 +1,8 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "description": "vql API server",
+  "main": "index.ts",
+  "license": "Apache-2.0",
+  "private": true
+}

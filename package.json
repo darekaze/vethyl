@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "vql-stack",
+  "name": "ethan",
   "version": "0.1.0",
-  "description": "Project VQL monorepo",
-  "repository": "darekaze/vql-stack",
+  "description": "Project Ethan monorepo -- Making ETH more powerful",
+  "repository": "darekaze/ethan",
   "author": "@DaRekaze",
   "license": "Apache-2.0",
   "scripts": {
