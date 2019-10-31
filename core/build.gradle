@@ -10,12 +10,14 @@ version = '1.0.0-SNAPSHOT'
 repositories {
   mavenCentral()
   jcenter()
+  maven { url "https://dl.bintray.com/ethereum/maven/" }
 }
 
 ext {
   kotlinVersion = '1.3.20'
   vertxVersion = '3.8.3'
   junitJupiterEngineVersion = '5.4.0'
+  ethereumjVersion = '1.12.0'
 }
 
 application {
@@ -33,10 +35,13 @@ dependencies {
   implementation "io.vertx:vertx-lang-kotlin-coroutines:$vertxVersion"
   implementation "io.vertx:vertx-mongo-client:$vertxVersion"
   implementation "io.vertx:vertx-lang-kotlin:$vertxVersion"
+  implementation "org.ethereum:ethereumj-core:$ethereumjVersion"
 
   testImplementation "io.vertx:vertx-junit5:$vertxVersion"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterEngineVersion"
   testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterEngineVersion"
+
+  compile 'cn.hutool:hutool-all:5.0.4'
 }
 
 compileKotlin {
