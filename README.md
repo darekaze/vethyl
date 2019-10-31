@@ -1,5 +1,5 @@
-# Project Ethan
+# Project Ethans
 
-Ethan -- A powerful node for quering Ethreum data
+Ethans -- A more powerful system for quering Ethreum data
 
 Work in Progress

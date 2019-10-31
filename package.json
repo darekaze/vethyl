@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "ethan",
+  "name": "ethans",
   "version": "0.1.0",
-  "description": "Project Ethan monorepo -- Making ETH more powerful",
-  "repository": "darekaze/ethan",
+  "description": "Project Ethans monorepo -- Making ETH more powerful",
+  "repository": "darekaze/ethans",
   "author": "@DaRekaze",
   "license": "Apache-2.0",
   "scripts": {
