@@ -86,7 +86,9 @@ local.properties
 .texlipse
 
 # STS (Spring Tool Suite)
+.apt_generated
 .springBeans
+.sts4-cache
 
 # Code Recommenders
 .recommenders/
@@ -130,7 +132,7 @@ cmake-buildTool-debug/
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
+out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
