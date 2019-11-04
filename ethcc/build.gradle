@@ -30,7 +30,9 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-  implementation "org.redisson:redisson:$redissonVersion"
+  implementation("org.redisson:redisson:$redissonVersion") {
+    exclude group: "de.ruedigermoeller", module: "fst"
+  }
   implementation("org.ethereum:ethereumj-core:$ethereumjVersion") {
     exclude group: "log4j"
     exclude group: "org.slf4j", module: "log4j-over-slf4j"

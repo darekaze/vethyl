@@ -1,0 +1,10 @@
+node_modules
+.git
+.cache
+.vscode
+dist
+build
+prisma
+*.md
+*.log
+.env*

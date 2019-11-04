@@ -1,0 +1,8 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    container_name: ethcc_redis
+    restart: on-failure
+    ports:
+      - "6377:6379"
