@@ -228,3 +228,6 @@ nbdist/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+### Eth-node data ###
+ethcc/database/

@@ -1,5 +1,6 @@
 package dev.darekaze.ethcc.ethereum;
 
+import dev.darekaze.ethcc.core.ChainBuffer;
 import org.ethereum.core.Block;
 import org.ethereum.core.TransactionReceipt;
 import org.ethereum.listener.EthereumListenerAdapter;
@@ -10,12 +11,16 @@ import java.util.List;
 
 public class EthListener extends EthereumListenerAdapter {
   private Logger logger = LoggerFactory.getLogger(EthListener.class);
-  // TODO: pass in redisson client
+  private ChainBuffer chainBuffer;
+
+  EthListener(ChainBuffer chainBuffer) {
+    this.chainBuffer = chainBuffer;
+  }
 
   @Override
   public void onBlock(Block block, List<TransactionReceipt> receipts) {
-    logger.info("Block received: " + block.getNumber());
-    // TODO: add block and receipts to redis
+    chainBuffer.push(block, receipts);
+    logger.info("Block {} successfully pushed to chain buffer", block.getNumber());
   }
 
   @Override
