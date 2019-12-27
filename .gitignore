@@ -230,4 +230,4 @@ nbdist/
 !.vscode/extensions.json
 
 ### Eth-node data ###
-ethcc/database/
+database/

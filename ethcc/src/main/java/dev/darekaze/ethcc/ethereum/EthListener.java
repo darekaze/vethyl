@@ -1,13 +1,10 @@
 package dev.darekaze.ethcc.ethereum;
 
 import dev.darekaze.ethcc.core.ChainBuffer;
-import org.ethereum.core.Block;
-import org.ethereum.core.TransactionReceipt;
+import org.ethereum.core.BlockSummary;
 import org.ethereum.listener.EthereumListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class EthListener extends EthereumListenerAdapter {
   private Logger logger = LoggerFactory.getLogger(EthListener.class);
@@ -18,9 +15,9 @@ public class EthListener extends EthereumListenerAdapter {
   }
 
   @Override
-  public void onBlock(Block block, List<TransactionReceipt> receipts) {
-    chainBuffer.push(block, receipts);
-    logger.info("Block {} successfully pushed to chain buffer", block.getNumber());
+  public void onBlock(BlockSummary blockSummary) {
+    chainBuffer.push(blockSummary);
+    logger.info("Block {} successfully pushed to chain buffer", blockSummary.getBlock().getNumber());
   }
 
   @Override
