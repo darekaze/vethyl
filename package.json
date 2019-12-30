@@ -7,14 +7,14 @@
   "author": "@DaRekaze",
   "license": "Apache-2.0",
   "scripts": {
-    "_start": "",
-    "_dev": "yarn workspaces run start",
     "_build": "yarn workspaces run build",
     "test": "jest",
     "lint": "eslint . --ext .js,.ts,.tsx",
-    "ws:c": "yarn workspace client",
+    "ws:client": "yarn workspace client",
+    "ws:crawler": "yarn workspace crawler",
     "ws:api": "yarn workspace api",
-    "dev:c": "yarn workspace client start",
+    "dev:client": "yarn workspace client start",
+    "dev:crawler": "yarn workspace crawler dev",
     "dev:api": "yarn workspace api start"
   },
   "devDependencies": {
@@ -41,6 +41,7 @@
   "jest": {
     "projects": [
       "client",
+      "crawler",
       "api"
     ]
   },
@@ -66,6 +67,7 @@
   },
   "workspaces": [
     "client",
+    "crawler",
     "api"
   ]
 }
