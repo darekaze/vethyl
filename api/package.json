@@ -8,7 +8,6 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -35,7 +34,6 @@
     "@types/node": "^12.7.5",
     "@types/supertest": "^2.0.8",
     "jest": "^24.9.0",
-    "prettier": "^1.18.2",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.1.1",
@@ -56,13 +54,5 @@
     },
     "coverageDirectory": "./coverage",
     "testEnvironment": "node"
-  },
-  "prettier": {
-    "printWidth": 85,
-    "semi": false,
-    "singleQuote": true,
-    "jsxBracketSameLine": true,
-    "trailingComma": "all",
-    "endOfLine": "lf"
   }
 }
