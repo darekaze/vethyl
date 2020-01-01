@@ -13,15 +13,26 @@
     "test": "jest"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "micro": "^9.3.4",
     "micro-cors": "^0.1.1",
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.3",
+    "ms": "^2.1.2",
+    "pino": "^5.15.0",
+    "pino-pretty": "^3.5.0",
     "rambda": "^4.2.0",
+    "sleep-promise": "^8.0.1",
     "web3x": "^4.0.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "@types/micro": "^7.3.3",
+    "@types/mongodb": "^3.3.14",
+    "@types/mongoose": "^5.5.37",
+    "@types/ms": "^0.7.31",
     "@types/node": "^12.12.12",
+    "@types/pino": "^5.15.1",
     "jest": "^24.9.0",
     "micro-dev": "^3.0.0",
     "ts-jest": "^24.2.0",
