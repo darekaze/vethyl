@@ -22,7 +22,8 @@
     "pino": "^5.15.0",
     "pino-pretty": "^3.5.0",
     "rambda": "^4.2.0",
-    "sleep-promise": "^8.0.1",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.8.0",
     "web3x": "^4.0.6"
   },
   "devDependencies": {
