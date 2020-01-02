@@ -22,6 +22,7 @@
     }
   },
   "rules": {
+    "arrow-parens": "off",
     "class-methods-use-this": "off",
     "no-useless-constructor": "off",
     "prettier/prettier": "warn",
