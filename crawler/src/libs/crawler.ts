@@ -6,31 +6,27 @@
 
 // storeBlocksToDb(self, start_number, end_number):
 
-
-import ms from 'ms'
 import { Eth } from 'web3x/eth'
+import { Container } from 'typedi'
+import { Logger } from 'pino'
 import { transformBlock } from '../utils'
-
-// Split the loader somewhere else
-const INTERVAL = ms('15s')
-const BLOCK_START = parseInt(process.env.BLOCK_START, 10)
-
-console.log(`Starting from: ${BLOCK_START}`)
+import config from '../config'
 
 // TODO: implement sync block feature
-async function syncBlockchain(eth: Eth) {
+async function syncBlockchain() {
+  const logger = Container.get<Logger>('logger')
+  const eth = Container.get<Eth>('web3')
   try {
     // const latestBlock = await eth.getBlockNumber()
     const block = await eth.getBlock(9194197)
 
-    console.dir(block)
-    console.dir(transformBlock(block))
+    logger.info(transformBlock(block))
   } catch (err) {
-    console.log(err)
+    logger.error(err)
   }
-  setTimeout(client => syncBlockchain(client), INTERVAL, eth)
+  setTimeout(syncBlockchain, config.syncInterval)
 }
 
-export default async (eth: Eth) => {
-  setTimeout(client => syncBlockchain(client), INTERVAL, eth)
+export default async () => {
+  setTimeout(syncBlockchain, config.syncInterval)
 }

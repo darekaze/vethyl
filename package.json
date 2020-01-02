@@ -15,7 +15,8 @@
     "ws:api": "yarn workspace api",
     "dev:client": "yarn workspace client start",
     "dev:crawler": "yarn workspace crawler dev",
-    "dev:api": "yarn workspace api start"
+    "dev:api": "yarn workspace api start",
+    "compose": "docker-compose up -d"
   },
   "devDependencies": {
     "@types/jest": "^24.0.25",

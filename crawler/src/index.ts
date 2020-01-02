@@ -1,3 +1,4 @@
+import 'reflect-metadata' // required for @Decorators
 import microCors from 'micro-cors'
 
 // Setup cors
