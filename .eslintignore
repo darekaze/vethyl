@@ -1,6 +1,5 @@
 node_modules
 .vscode
-libs/
 dist/
 build/
 docs/

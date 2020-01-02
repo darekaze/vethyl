@@ -15,7 +15,8 @@
         "alwaysTryTypes": true,
         "directory": [
           "./tsconfig.json",
-          "./client/tsconfig.json"
+          "./client/tsconfig.json",
+          "./crawler/tsconfig.json"
         ]
       }
     }
