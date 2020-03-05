@@ -18,7 +18,13 @@ async function syncBlockchain() {
   const eth = Container.get<Eth>('web3')
   try {
     // const latestBlock = await eth.getBlockNumber()
-    const block = await eth.getBlock(9194197)
+
+    // Loop should start here
+    const blockNumber = 9194197
+
+    const block = await eth.getBlock(blockNumber, true)
+
+    // Promise.all for block and transactions (receipts later)
 
     logger.info(transformBlock(block))
   } catch (err) {

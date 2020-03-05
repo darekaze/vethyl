@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import Logger from './logger'
 import web3Loader from './web3'
 import initCrawler from './crawler'
@@ -11,8 +12,17 @@ export default async () => {
   const web3Connection = await web3Loader()
   Logger.info('✌️ Web3 loaded and connected!')
 
-  // TODO: inject mongoose model here
-  const models: any[] = []
+  // Inject mongoose models
+  const models: any[] = [
+    {
+      name: 'blockModel',
+      model: require('../models/block').default,
+    },
+    {
+      name: 'TxnModel',
+      model: require('../models/transaction').default,
+    },
+  ]
 
   await depInjectorLoader(web3Connection, models)
   Logger.info('✌️ Dependency Injector loaded')

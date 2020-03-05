@@ -4,6 +4,7 @@ import LoggerInstance from './logger'
 
 export default async (web3Instance: Eth, models: { name: string; model: any }[]) => {
   try {
+    // Inject models
     models.forEach(m => {
       Container.set(m.name, m.model)
     })
