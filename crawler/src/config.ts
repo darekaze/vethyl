@@ -13,7 +13,6 @@ if (!envFound) {
 export default {
   web3Url: process.env.WEB3_URL || 'wss://mainnet.infura.io/ws',
   dbUrl: process.env.DB_URL,
-  jwtSecret: process.env.JWT_SECRET || 'waahaha',
-  syncInterval: ms(process.env.SYNC_INTERVAL || '15s'),
+  syncInterval: ms(process.env.SYNC_INTERVAL || '18s'),
   blockStart: parseInt(process.env.BLOCK_START || '9190000', 10), // change to 0 after
 }
