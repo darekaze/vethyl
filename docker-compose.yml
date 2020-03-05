@@ -2,13 +2,13 @@ version: "3"
 services:
   redis:
     image: redis
-    container_name: ethans_redis
+    container_name: vethyl_redis
     restart: on-failure
     ports:
       - "6377:6379"
   mongodb:
     image: mongo:4.2.2-bionic
-    container_name: ethans_mongodb
+    container_name: vethyl_mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=wulala
       - MONGO_INITDB_ROOT_PASSWORD=anythingtbh
