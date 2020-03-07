@@ -1,6 +1,6 @@
 import { BlockResponse, TransactionResponse } from 'web3x/formatters'
 import { bufferToHex } from 'web3x/utils'
-import { DbBlock } from './@types/interfaces'
+import { DbBlock } from './@types/IBlock'
 
 export const transformBlock = (block: BlockResponse<TransactionResponse>) => {
   const txHexList = block.transactions.map(tx => tx.hash)

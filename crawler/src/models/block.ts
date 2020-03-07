@@ -1,7 +1,5 @@
-import mongoose, { Document } from 'mongoose'
-import { DbBlock } from 'src/@types/interfaces'
-
-export type IBlock = DbBlock & Document
+import mongoose from 'mongoose'
+import { IBlock } from 'src/@types/IBlock'
 
 const BlockSchema = new mongoose.Schema({
   number: { type: Number, index: true },

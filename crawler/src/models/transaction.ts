@@ -1,8 +1,6 @@
-import mongoose, { Document } from 'mongoose'
-import { DbTransaction } from 'src/@types/interfaces'
+import mongoose from 'mongoose'
+import { ITransaction } from 'src/@types/ITransaction'
 import { Address } from 'web3x/address'
-
-export type ITransaction = DbTransaction & Document
 
 const TxnSchema = new mongoose.Schema({
   hash: { type: String, unique: true, index: true },
@@ -10,6 +8,7 @@ const TxnSchema = new mongoose.Schema({
   blockNumber: { type: Number, index: true },
   from: { type: String, set: (v: Address) => v.toString() }, // index?
   to: { type: String, set: (v: Address) => v.toString() }, // index?
+  doneAt: { type: Date, set: (v: number) => new Date(v) }, // index?
   gas: Number,
   gasPrice: Number,
   input: String,

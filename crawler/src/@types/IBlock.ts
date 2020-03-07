@@ -1,3 +1,5 @@
+import { Document } from 'mongoose'
+
 export type DbBlock = {
   number: number | null
   hash: string | null
@@ -20,19 +22,4 @@ export type DbBlock = {
   uncles: string[]
 }
 
-export type DbTransaction = {
-  blockHash: string | null
-  blockNumber: number | null
-  from: string
-  gas: number
-  gasPrice: number
-  hash: string
-  input: string
-  nonce: number
-  to: string | null
-  transactionIndex: number | null
-  value: string
-  v: string
-  r: string
-  s: string
-}
+export type IBlock = DbBlock & Document
