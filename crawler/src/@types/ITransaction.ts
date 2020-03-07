@@ -1,9 +1,14 @@
 import { Document } from 'mongoose'
+import { TransactionResponse } from 'web3x/formatters'
 
-export type DbTransaction = {
+export type DbTransaction = TransactionResponse & {
+  doneAt: number // timestamp
+}
+
+export type ITransaction = {
   hash: string
-  blockHash: string | null
-  blockNumber: number | null
+  blockHash: string
+  blockNumber: number
   from: string // converted from Address
   to: string | null // converted from Address
   doneAt: Date // converted from timestamp
@@ -16,6 +21,4 @@ export type DbTransaction = {
   v: string
   r: string
   s: string
-}
-
-export type ITransaction = DbTransaction & Document
+} & Document

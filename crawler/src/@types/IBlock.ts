@@ -1,10 +1,10 @@
 import { Document } from 'mongoose'
 
 export type DbBlock = {
-  number: number | null
-  hash: string | null
+  number: number
+  hash: string
   parentHash: string
-  nonce: string | null
+  nonce: string
   sha3Uncles: string
   logsBloom: string | null
   transactionsRoot: string

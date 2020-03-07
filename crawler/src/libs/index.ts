@@ -15,7 +15,7 @@ export default async () => {
   // Inject mongoose models
   const models: any[] = [
     {
-      name: 'blockModel',
+      name: 'BlockModel',
       model: require('../models/block').default,
     },
     {
