@@ -4,7 +4,7 @@ import { TransactionResponse } from 'web3x/formatters'
 import { ITransaction, DbTransaction } from '../@types/ITransaction'
 
 @Service()
-export default class TxnService {
+export class TxnService {
   constructor(
     @Inject('TxnModel') private TxnModel: Models.TxnModel,
     @Inject('logger') private logger: Logger,
