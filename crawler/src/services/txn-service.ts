@@ -14,7 +14,7 @@ export class TxnService {
     transactions: TransactionResponse[],
     timestamp: number,
   ): Promise<ITransaction[]> {
-    // Skipping empty transaction list
+    // skipping empty transaction list
     if (transactions.length < 1) return null
 
     try {
