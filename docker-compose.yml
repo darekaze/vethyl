@@ -2,7 +2,18 @@ version: "3"
 services:
   redis:
     image: redis
-    container_name: ethcc_redis
+    container_name: vethyl_redis
     restart: on-failure
     ports:
       - "6377:6379"
+  mongodb:
+    image: mongo:4.2.2-bionic
+    container_name: vethyl_mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=wulala
+      - MONGO_INITDB_ROOT_PASSWORD=anythingtbh
+    restart: on-failure
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb:/data/db

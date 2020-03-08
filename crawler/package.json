@@ -1,0 +1,47 @@
+{
+  "name": "crawler",
+  "version": "0.1.0",
+  "description": "Ethereum crawler",
+  "main": "src/index.ts",
+  "author": "@darekaze",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "start": "micro dist/index.js -l tcp://0.0.0.0:3007",
+    "dev": "micro-dev tsnode.js -s -p 3007",
+    "test": "jest"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "micro": "^9.3.4",
+    "micro-cors": "^0.1.1",
+    "mongodb": "^3.5.4",
+    "mongoose": "^5.9.3",
+    "ms": "^2.1.2",
+    "pino": "^5.17.0",
+    "pino-pretty": "^3.6.1",
+    "rambda": "^4.2.0",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.8.0",
+    "web3x": "^4.0.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/micro": "^7.3.3",
+    "@types/mongodb": "^3.5.1",
+    "@types/mongoose": "^5.7.3",
+    "@types/ms": "^0.7.31",
+    "@types/node": "^12.12.22",
+    "@types/pino": "^5.15.5",
+    "jest": "^24.9.0",
+    "micro-dev": "^3.0.0",
+    "ts-jest": "^24.2.0",
+    "ts-node": "^8.5.2",
+    "typescript": "~3.7.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}

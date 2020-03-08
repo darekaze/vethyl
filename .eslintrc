@@ -1,9 +1,6 @@
 {
   "extends": [
-    "airbnb",
-    "airbnb/hooks",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
+    "airbnb-typescript",
     "prettier/@typescript-eslint",
     "prettier/react"
   ],
@@ -18,12 +15,14 @@
         "alwaysTryTypes": true,
         "directory": [
           "./tsconfig.json",
-          "./client/tsconfig.json"
+          "./client/tsconfig.json",
+          "./crawler/tsconfig.json"
         ]
       }
     }
   },
   "rules": {
+    "arrow-parens": "off",
     "class-methods-use-this": "off",
     "no-useless-constructor": "off",
     "prettier/prettier": "warn",

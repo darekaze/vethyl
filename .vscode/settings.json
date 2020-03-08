@@ -15,4 +15,7 @@
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "java.configuration.updateBuildConfiguration": "disabled",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 }
