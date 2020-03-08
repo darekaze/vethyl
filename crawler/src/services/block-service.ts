@@ -11,7 +11,7 @@ export class BlockService {
 
   public async insertBlock(block: DbBlock): Promise<IBlock> {
     try {
-      this.logger.silly('Creating block db record')
+      this.logger.trace('Creating block db record')
       const blockRecord = await this.blockModel.create(block)
 
       if (!blockRecord) {

@@ -15,12 +15,12 @@ export class TxnService {
     timestamp: number,
   ): Promise<ITransaction[]> {
     try {
-      this.logger.silly('Add doneBy prop to every transaction')
+      this.logger.trace('Add doneBy prop to every transaction')
       const txns = transactions.map(
-        txn => <DbTransaction>{ ...txn, doneAt: timestamp },
+        txn => <DbTransaction>{ ...txn, doneAt: timestamp * 1000 },
       )
 
-      this.logger.silly('Inserting block transactions to db')
+      this.logger.trace('Inserting block transactions to db')
       const txnRecords = await this.TxnModel.create(txns)
 
       if (!txnRecords) {
