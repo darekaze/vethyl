@@ -14,6 +14,9 @@ export class TxnService {
     transactions: TransactionResponse[],
     timestamp: number,
   ): Promise<ITransaction[]> {
+    // Skipping empty transaction list
+    if (transactions.length < 1) return null
+
     try {
       this.logger.trace('Add doneBy prop to every transaction')
       const txns = transactions.map(

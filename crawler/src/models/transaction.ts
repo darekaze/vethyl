@@ -7,7 +7,7 @@ const TxnSchema = new mongoose.Schema({
   blockHash: { type: String, index: true },
   blockNumber: { type: Number, index: true },
   from: { type: String, index: true, set: (v: Address) => v.toString() },
-  to: { type: String, index: true, set: (v: Address) => v.toString() },
+  to: { type: String, index: true, set: (v: Address) => (v ? v.toString() : null) },
   doneAt: { type: Date, index: true },
   gas: Number,
   gasPrice: Number,
