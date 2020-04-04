@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 
 // Self modules
 import { BlocksModule } from './blocks/blocks.module'
+import { TransactionsModule } from './transactions/txns.module'
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { BlocksModule } from './blocks/blocks.module'
       }),
     }),
     BlocksModule,
+    TransactionsModule,
   ],
 })
 export class AppModule {}
