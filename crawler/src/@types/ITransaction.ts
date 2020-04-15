@@ -11,12 +11,12 @@ export type DbTransaction = {
   value: string
   gas: number
   gasPrice: string
-  gasUsed: string
+  gasUsed: number
   nonce: number
   transactionIndex: number | null
   input: string
-  status?: string
-  contractAddress?: string
+  status?: boolean
+  contractAddress?: Address
 }
 
 export type ITransaction = {
@@ -33,6 +33,6 @@ export type ITransaction = {
   nonce: number
   transactionIndex: number | null
   input: string
-  status?: string // from receipts
+  status?: boolean // from receipts
   contractAddress?: string // from receipts
 } & Document

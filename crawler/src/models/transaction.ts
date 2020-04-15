@@ -12,12 +12,12 @@ const TxnSchema = new mongoose.Schema({
   value: String,
   gas: Number,
   gasPrice: Number,
-  gasUsed: Number, // from receipts
+  gasUsed: Number, // -- receipts
   nonce: Number,
   transactionIndex: Number,
   input: String,
-  status: Boolean, // from receipts
-  contractAddr: String, // from receipts
+  status: Boolean, // -- receipts
+  contractAddr: { type: String, set: (v: Address) => (v ? v.toString() : null) }, // -- receipts
 })
 
 export default mongoose.model<ITransaction>('Transaction', TxnSchema)
