@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Model } from 'mongoose'
-import { IBlock } from '../IBlock'
-import { ITransaction } from '../ITransaction'
+import { IBlock, ITransaction } from '..'
 
 // globals
 declare global {

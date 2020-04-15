@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import { ITransaction } from 'src/@types/ITransaction'
 import { Address } from 'web3x/address'
+import { ITransaction } from 'src/@types'
 
 const TxnSchema = new mongoose.Schema({
   hash: { type: String, unique: true, index: true },

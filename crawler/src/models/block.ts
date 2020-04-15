@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { IBlock } from 'src/@types/IBlock'
+import { IBlock } from 'src/@types'
 
 const BlockSchema = new mongoose.Schema({
   number: { type: Number, index: true },
