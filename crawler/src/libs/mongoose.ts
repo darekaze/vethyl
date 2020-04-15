@@ -6,7 +6,6 @@ export default async () => {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
-    autoReconnect: true,
   })
   return connection.connection.db
 }
