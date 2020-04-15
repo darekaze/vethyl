@@ -29,10 +29,7 @@ export class BlockService {
   public async getBlockNumber(): Promise<number> {
     try {
       this.logger.trace('Get latest block from db')
-      const latestBlock = await this.blockModel
-        .findOne()
-        .sort('-number')
-        .exec()
+      const latestBlock = await this.blockModel.findOne().sort('-number').exec()
 
       if (!latestBlock) {
         this.logger.warn(

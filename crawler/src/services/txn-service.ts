@@ -20,7 +20,7 @@ export class TxnService {
     try {
       this.logger.trace('Add doneBy prop to every transaction')
       const txns = transactions.map(
-        txn => <DbTransaction>{ ...txn, doneAt: timestamp * 1000 },
+        (txn) => <DbTransaction>{ ...txn, doneAt: timestamp * 1000 },
       )
 
       this.logger.trace('Inserting block transactions to db')
