@@ -6,7 +6,6 @@ export type DbBlock = {
   parentHash: string
   nonce: string
   sha3Uncles: string
-  logsBloom: string | null
   transactionsRoot: string
   stateRoot: string
   receiptsRoot: string
@@ -18,6 +17,7 @@ export type DbBlock = {
   gasLimit: number
   gasUsed: number
   timestamp: number
+  minedAt: number
   transactions: string[]
   uncles: string[]
 }

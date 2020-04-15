@@ -6,18 +6,18 @@ const TxnSchema = new mongoose.Schema({
   hash: { type: String, unique: true, index: true },
   blockHash: { type: String, index: true },
   blockNumber: { type: Number, index: true },
+  doneAt: { type: Date, index: true },
   from: { type: String, index: true, set: (v: Address) => v.toString() },
   to: { type: String, index: true, set: (v: Address) => (v ? v.toString() : null) },
-  doneAt: { type: Date, index: true },
+  value: String,
   gas: Number,
   gasPrice: Number,
-  input: String,
+  gasUsed: Number, // from receipts
   nonce: Number,
   transactionIndex: Number,
-  r: String,
-  s: String,
-  v: String,
-  value: String,
+  input: String,
+  status: Boolean, // from receipts
+  contractAddr: String, // from receipts
 })
 
 export default mongoose.model<ITransaction>('Transaction', TxnSchema)
