@@ -52,24 +52,39 @@ export const formatTxnsWithReceipts = async (
   return Promise.all(formattedTxns)
 }
 
-export const fetchUncles = async (
-  block: number,
-  uncleCount: number,
-): Promise<UncleInfo[]> => {
-  if (uncleCount < 1) return []
+//* Note [for dev with infura]: infura won't store old uncles...
+export const fetchUncles = async (uncleHashes: string[]): Promise<UncleInfo[]> => {
+  if (uncleHashes.length < 1) return []
 
   const eth = Container.get<Eth>('web3')
 
-  const uncles = [...Array(uncleCount).keys()].map(
-    async (index): Promise<UncleInfo> => {
-      const { number, miner } = await eth.getUncle(block, index)
-      return {
-        uncleHeight: number,
-        unclePosition: index,
-        blockHeight: block,
-        miner,
-      }
+  const uncles = uncleHashes.map(
+    async (hash): Promise<UncleInfo> => {
+      const { number, miner } = await eth.getBlock(hash)
+      return { hash, number, miner }
     },
   )
   return Promise.all(uncles)
 }
+
+// export const fetchUnclesWithGetUncle = async (
+//   block: number,
+//   uncleCount: number,
+// ): Promise<UncleInfo[]> => {
+//   if (uncleCount < 1) return []
+
+//   const eth = Container.get<Eth>('web3')
+
+//   const uncles = [...Array(uncleCount).keys()].map(
+//     async (index): Promise<UncleInfo> => {
+//       const { number, miner } = await eth.getUncle(block, index)
+//       return {
+//         uncleHeight: number,
+//         unclePosition: index,
+//         blockHeight: block,
+//         miner,
+//       }
+//     },
+//   )
+//   return Promise.all(uncles)
+// }

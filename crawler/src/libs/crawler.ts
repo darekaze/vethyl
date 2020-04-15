@@ -42,11 +42,11 @@ async function syncBlockchain() {
         const [formattedBlock, formattedTxns, uncleInfos] = await Promise.all([
           formatBlock(block),
           formatTxnsWithReceipts(block.transactions, block.timestamp),
-          fetchUncles(block.number, block.uncles.length),
+          fetchUncles(block.uncles),
         ])
 
         // TODO: add balance service later
-        logger.debug('Inserting block to db: %s', formattedBlock.hash)
+        logger.info('Inserting block to db: %s', formattedBlock.hash)
         await Promise.all([
           blockServiceInstance.insertBlock(formattedBlock),
           txnServiceInstance.insertBlockTxns(formattedTxns),
