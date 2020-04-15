@@ -8,3 +8,4 @@ prisma
 *.md
 *.log
 .env*
+/mongodb
