@@ -31,7 +31,7 @@ export const formatTxnsWithReceipts = async (
   txns: TransactionResponse[],
   timestamp: number,
 ): Promise<DbTransaction[]> => {
-  if (txns.length < 1) return null
+  if (txns.length < 1) return []
 
   const eth = Container.get<Eth>('web3')
 
@@ -56,7 +56,7 @@ export const fetchUncles = async (
   block: number,
   uncleCount: number,
 ): Promise<UncleInfo[]> => {
-  if (uncleCount < 1) return null
+  if (uncleCount < 1) return []
 
   const eth = Container.get<Eth>('web3')
 
