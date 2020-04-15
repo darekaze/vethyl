@@ -4,7 +4,7 @@ import { Container } from 'typedi'
 import { Logger } from 'pino'
 
 import { BlockService, TxnService } from '../services'
-import { transformBlock } from '../utils'
+import { formatBlock, formatTxnsWithReceipts, fetchUncles } from '../utils'
 import config from '../config'
 
 const BLOCK_BUFFER = 6
@@ -14,15 +14,14 @@ const SYNC_LIMIT = 1000
 async function syncBlockchain() {
   const logger = Container.get<Logger>('logger')
   const eth = Container.get<Eth>('web3')
-  try {
-    const blockServiceInstance = Container.get(BlockService)
-    const txnServiceInstance = Container.get(TxnService)
+  const blockServiceInstance = Container.get(BlockService)
+  const txnServiceInstance = Container.get(TxnService)
 
-    // Get geth latest block number and minus [6] for buffer zone
+  try {
+    // Get geth latest block number and minus buffer zone
     const ethBlockHead = (await eth.getBlockNumber()) - BLOCK_BUFFER
     const dbBlockHead = await blockServiceInstance.getBlockNumber()
 
-    // Start sync
     if (dbBlockHead >= ethBlockHead) {
       logger.info('Blockchain is at latest state..')
     } else {
@@ -32,20 +31,25 @@ async function syncBlockchain() {
         ? start + SYNC_LIMIT
         : ethBlockHead
 
+      //* Sync start from here
       logger.info('Syncing from %d to %d', start, end)
 
       for (let n = start; n <= end; n += 1) {
         logger.info('Fetching block %d.', n)
         const block = await eth.getBlock(n, true)
 
-        const { transactions, timestamp } = block
-        const formattedBlock = transformBlock(block)
+        // Fetch and format data
+        const [formattedBlock, formattedTxns, uncleInfos] = await Promise.all([
+          formatBlock(block),
+          formatTxnsWithReceipts(block.transactions, block.timestamp),
+          fetchUncles(block.number, block.uncles.length),
+        ])
 
-        // @TODO: add receipts service later
-        logger.debug('Inserting block to db: %o', block)
+        // TODO: add balance service later
+        logger.debug('Inserting block to db: %s', formattedBlock.hash)
         await Promise.all([
           blockServiceInstance.insertBlock(formattedBlock),
-          txnServiceInstance.insertBlockTxns(transactions, timestamp),
+          txnServiceInstance.insertBlockTxns(formattedTxns),
         ])
       }
 
@@ -60,5 +64,5 @@ async function syncBlockchain() {
 }
 
 export default async () => {
-  setTimeout(syncBlockchain, config.syncInterval)
+  setTimeout(syncBlockchain, 5000)
 }
