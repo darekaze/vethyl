@@ -65,7 +65,7 @@ export const fetchUncles = async (uncleHashes: string[]): Promise<UncleInfo[]> =
   const uncles = uncleHashes.map(
     async (hash): Promise<UncleInfo> => {
       const { number, miner } = await eth.getBlock(hash)
-      return { hash, number, miner }
+      return { hash, number, miner: miner.toString() }
     },
   )
   return Promise.all(uncles)
