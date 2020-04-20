@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { Address } from 'web3x/address'
 import { ITransaction } from 'src/@types'
 
 const TxnSchema = new mongoose.Schema({
@@ -7,8 +6,8 @@ const TxnSchema = new mongoose.Schema({
   blockHash: { type: String, index: true },
   blockNumber: { type: Number, index: true },
   doneAt: { type: Date, index: true },
-  from: { type: String, index: true, set: (v: Address) => v.toString() },
-  to: { type: String, index: true, set: (v: Address) => (v ? v.toString() : null) },
+  from: { type: String, index: true },
+  to: { type: String, index: true },
   value: String,
   gas: Number,
   gasPrice: Number,
@@ -17,7 +16,7 @@ const TxnSchema = new mongoose.Schema({
   transactionIndex: Number,
   input: String,
   status: Boolean, // -- receipts
-  contractAddr: { type: String, set: (v: Address) => (v ? v.toString() : null) }, // -- receipts
+  contractAddress: String, // -- receipts
 })
 
 export default mongoose.model<ITransaction>('Transaction', TxnSchema)

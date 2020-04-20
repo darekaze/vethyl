@@ -1,38 +1,21 @@
 import { Document } from 'mongoose'
-import { Address } from 'web3x/address'
 
 export type DbTransaction = {
   hash: string
   blockHash: string | null
   blockNumber: number | null
   doneAt: number // timestamp in ms
-  from: Address
-  to: Address | null
+  from: string // Address
+  to: string | null // Address
   value: string
   gas: number
-  gasPrice: string
-  gasUsed: number
-  nonce: number
-  transactionIndex: number | null
-  input: string
-  status?: boolean
-  contractAddress?: Address
-}
-
-export type ITransaction = {
-  hash: string
-  blockHash: string | null
-  blockNumber: number | null
-  doneAt: Date
-  from: string // converted from Address
-  to: string | null // converted from Address
-  value: string
-  gas: number
-  gasPrice: number
+  gasPrice: number // string to number
   gasUsed: number // from receipts
   nonce: number
   transactionIndex: number | null
   input: string
   status?: boolean // from receipts
-  contractAddress?: string // from receipts
-} & Document
+  contractAddress?: string // Address -- from receipts
+}
+
+export type ITransaction = DbTransaction & { doneAt: Date } & Document
