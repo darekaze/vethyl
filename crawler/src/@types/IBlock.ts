@@ -22,4 +22,4 @@ export type DbBlock = {
   uncles: string[]
 }
 
-export type IBlock = DbBlock & Document
+export type IBlock = DbBlock & { minedAt: Date } & Document
