@@ -10,10 +10,10 @@ export class TxnService {
   ) {}
 
   public async insertBlockTxns(txns: DbTransaction[]): Promise<ITransaction[]> {
-    // skipping empty transaction list
-    if (txns.length < 1) return null
-
     try {
+      // skipping empty transaction list
+      if (txns.length < 1) return null
+
       this.logger.trace('Inserting block transactions to db')
       const txnRecords = await this.txnModel.create(txns)
 
