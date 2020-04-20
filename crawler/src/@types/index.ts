@@ -1,3 +1,5 @@
 export * from './IBlock'
 export * from './ITransaction'
+export * from './IBalanceState'
+export * from './IBalanceRecord'
 export * from './uncle'
