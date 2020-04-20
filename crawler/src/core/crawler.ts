@@ -2,9 +2,8 @@
 import { Eth } from 'web3x/eth'
 import { Container } from 'typedi'
 import { Logger } from 'pino'
-
+import { formatBlock, formatTxnsWithReceipts, fetchUncles } from './utils'
 import { BlockService, TxnService } from '../services'
-import { formatBlock, formatTxnsWithReceipts, fetchUncles } from '../utils'
 import config from '../config'
 
 const BLOCK_BUFFER = 6

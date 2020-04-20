@@ -1,9 +1,9 @@
 /* eslint-disable global-require */
-import Logger from './logger'
-import web3Loader from './web3'
-import initCrawler from './crawler'
 import mongooseLoader from './mongoose'
+import web3Loader from './web3'
 import depInjectorLoader from './depInjector'
+import initCrawler from '../core/crawler'
+import Logger from './logger'
 
 export default async () => {
   await mongooseLoader()
