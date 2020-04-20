@@ -22,6 +22,14 @@ export default async () => {
       name: 'TxnModel',
       model: require('../models/transaction').default,
     },
+    {
+      name: 'BalanceStateModel',
+      model: require('../models/balance-state').default,
+    },
+    {
+      name: 'BalanceRecordModel',
+      model: require('../models/balance-record').default,
+    },
   ]
 
   await depInjectorLoader(web3Connection, models)
