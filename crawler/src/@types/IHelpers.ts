@@ -9,7 +9,7 @@ export type BalanceInfo = {
 }
 
 export type ExchangeList = {
-  [address: string]: BalanceInfo
+  [address: string]: Big[]
 }
 
 export type UncleInfo = {
