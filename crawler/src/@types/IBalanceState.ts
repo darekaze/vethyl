@@ -2,7 +2,7 @@ import { Document } from 'mongoose'
 
 export type DbBalanceState = {
   address: string
-  balance: number
+  balance: string // Big
   updateAt: number
 }
 

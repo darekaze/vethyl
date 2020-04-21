@@ -3,7 +3,7 @@ import { IBalanceState } from 'src/@types'
 
 const BalanceStateSchema = new mongoose.Schema({
   address: { type: String, index: true },
-  balance: Number,
+  balance: mongoose.Types.Decimal128,
   updateAt: Date,
 })
 

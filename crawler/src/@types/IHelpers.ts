@@ -1,10 +1,14 @@
 // Helpers
+import Big from 'big.js'
 
 export type BalanceInfo = {
-  balance: number
+  address: string
+  income: Big
+  expense: Big
+  exchange: Big
 }
 
-export type AddressList = {
+export type ExchangeList = {
   [address: string]: BalanceInfo
 }
 
