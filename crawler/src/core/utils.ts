@@ -40,13 +40,12 @@ export const formatTxnsWithReceipts = async (
       const receipts = await eth.getTransactionReceipt(txn.hash)
       const { gasUsed, status, contractAddress } = receipts
       const filteredTxn = omit(txn, ['v', 'r', 's'])
-      const { from, to, gasPrice } = txn
+      const { from, to } = txn
       return {
         ...filteredTxn,
         from: from.toString(),
         to: to ? to.toString() : null,
         doneAt: timestamp * 1000,
-        gasPrice: parseInt(gasPrice, 10),
         gasUsed,
         status,
         contractAddress: contractAddress ? contractAddress.toString() : null,

@@ -7,9 +7,9 @@ export type DbTransaction = {
   doneAt: number // timestamp in ms
   from: string // Address
   to: string | null // Address
-  value: string
+  value: string // big
   gas: number
-  gasPrice: number // string to number
+  gasPrice: string // big
   gasUsed: number // from receipts
   nonce: number
   transactionIndex: number | null

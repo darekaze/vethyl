@@ -8,9 +8,9 @@ const TxnSchema = new mongoose.Schema({
   doneAt: { type: Date, index: true },
   from: { type: String, index: true },
   to: { type: String, index: true },
-  value: String,
+  value: String, // Big
   gas: Number,
-  gasPrice: Number,
+  gasPrice: String, // Big
   gasUsed: Number, // -- receipts
   nonce: Number,
   transactionIndex: Number,
