@@ -13,6 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "big.js": "^5.2.2",
     "dotenv": "^8.2.0",
     "lodash": "^4.17.15",
     "micro": "^9.3.4",
@@ -27,6 +28,7 @@
     "web3x": "^4.0.6"
   },
   "devDependencies": {
+    "@types/big.js": "^4.0.5",
     "@types/jest": "^25.2.1",
     "@types/lodash": "^4.14.149",
     "@types/micro": "^7.3.3",
