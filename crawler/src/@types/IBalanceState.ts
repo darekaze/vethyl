@@ -1,4 +1,4 @@
-import { Document } from 'mongoose'
+import { Document, Types } from 'mongoose'
 
 export type DbBalanceState = {
   address: string
@@ -6,4 +6,8 @@ export type DbBalanceState = {
   updateAt: number
 }
 
-export type IBalanceState = DbBalanceState & { updateAt: Date } & Document
+export type IBalanceState = {
+  address: string
+  balance: Types.Decimal128
+  updateAt: Date
+} & Document

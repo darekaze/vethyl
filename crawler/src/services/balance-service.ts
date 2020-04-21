@@ -6,14 +6,14 @@ import _mergeWith from 'lodash/mergeWith'
 import {
   DbBlock,
   DbTransaction,
-  UncleInfo,
-  IBalanceState,
+  DbBalanceRecord,
   IBalanceRecord,
   ExchangeList,
   BalanceInfo,
+  UncleInfo,
 } from 'src/@types'
 
-// Future: also trace internal txns and old transaction state
+//* Future: also trace internal txns and old transaction state
 // https://ethereum.stackexchange.com/questions/1179/how-to-know-if-a-transaction-went-through-or-not-out-of-gas
 // https://eips.ethereum.org/EIPS/eip-658
 // https://eips.ethereum.org/EIPS/eip-609
@@ -32,7 +32,7 @@ export class BalanceService {
     block: DbBlock,
     txns: DbTransaction[],
     uncleInfos: UncleInfo[],
-  ): Promise<IBalanceState[]> {
+  ): Promise<IBalanceRecord[]> {
     try {
       const [totalTxnFee, recordsFromTxns] = this.calTxnFees(txns)
       const recordsFromRewards = this.calRewards(block, uncleInfos)
@@ -40,15 +40,38 @@ export class BalanceService {
 
       // Merge two records and format to BalanceInfo
       const balanceInfos = this.formatRecordsToBalance(
-        recordsFromRewards,
         recordsFromTxns,
+        recordsFromRewards,
       )
 
-      // dont bother balance, sort out income expense info first
-      // use $inc to change balance state's balance field (work with decimal)
-      // TODO: 3. perform upserts...
+      this.logger.trace('Upserting balance states to db')
+      const balanceRecords = await Promise.all(
+        balanceInfos.map(
+          async (info): Promise<DbBalanceRecord> => {
+            const { address, income, expense } = info
+            const { balance } = await this.balanceState.findOneAndUpdate(
+              { address },
+              {
+                $inc: { balance: income.plus(expense).toString() },
+                updateAt: block.minedAt,
+              },
+              { new: true, upsert: true },
+            )
+            return {
+              address,
+              time: block.minedAt,
+              income: income.toString(),
+              expense: expense.toString(),
+              balance,
+            }
+          },
+        ),
+      )
 
-      return []
+      this.logger.trace('Inserting balance record to db')
+      const result = await this.balanceRecord.create(balanceRecords)
+
+      return result
     } catch (e) {
       this.logger.error(e)
       throw e
@@ -72,10 +95,12 @@ export class BalanceService {
       }
       records[from].push(value.plus(txnFee).times(-1))
 
-      if (!records[to]) {
-        records[to] = []
+      if (!value.eq(0)) {
+        if (!records[to]) {
+          records[to] = []
+        }
+        records[to].push(value)
       }
-      records[to].push(value)
 
       return sum.plus(txnFee)
     }, Big(0))
@@ -90,6 +115,7 @@ export class BalanceService {
       [block.miner]: [blockReward.plus(inclusionReward)],
     }
 
+    // If uncle list is empty
     if (uncleInfos.length < 1) return records
 
     uncleInfos.forEach((uncle) => {
@@ -134,34 +160,8 @@ export class BalanceService {
           (sum, value) => (value.lt(0) ? sum.plus(value) : sum),
           Big(0),
         )
-        return {
-          address,
-          income,
-          expense,
-          exchange: income.plus(expense),
-        }
+        return { address, income, expense }
       },
     )
   }
-
-  // change it to bulk upsert instead?
-  // private async getAddressBalance(address: string): Promise<IBalanceState> {
-  //   try {
-  //     this.logger.trace('Get balance of %s', address)
-  //     const account = await this.balanceState.findOne({ address }).exec()
-
-  //     if (!account) {
-  //       this.logger.warn(
-  //         'No balance record for %s, returning 0 for balance',
-  //         address,
-  //       )
-  //       return { address, balance: 0 }
-  //     }
-
-  //     return account.balance
-  //   } catch (e) {
-  //     this.logger.error(e)
-  //     throw e
-  //   }
-  // }
 }

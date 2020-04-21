@@ -3,7 +3,7 @@ import { Eth } from 'web3x/eth'
 import { Container } from 'typedi'
 import { Logger } from 'pino'
 import { formatBlock, formatTxnsWithReceipts, fetchUncles } from './utils'
-import { BlockService, TxnService } from '../services'
+import { BlockService, TxnService, BalanceService } from '../services'
 import config from '../config'
 
 const BLOCK_BUFFER = 6
@@ -15,6 +15,7 @@ async function syncBlockchain() {
   const eth = Container.get<Eth>('web3')
   const blockServiceInstance = Container.get(BlockService)
   const txnServiceInstance = Container.get(TxnService)
+  const balanceServiceInstance = Container.get(BalanceService)
 
   try {
     // Get geth latest block number and minus buffer zone
@@ -44,11 +45,15 @@ async function syncBlockchain() {
           fetchUncles(block.uncles),
         ])
 
-        // TODO: add balance service later
         logger.info('Inserting block to db: %s', formattedBlock.hash)
         await Promise.all([
           blockServiceInstance.insertBlock(formattedBlock),
           txnServiceInstance.insertBlockTxns(formattedTxns),
+          balanceServiceInstance.updateBalances(
+            formattedBlock,
+            formattedTxns,
+            uncleInfos,
+          ),
         ])
       }
 

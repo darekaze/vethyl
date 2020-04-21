@@ -5,7 +5,6 @@ export type BalanceInfo = {
   address: string
   income: Big
   expense: Big
-  exchange: Big
 }
 
 export type ExchangeList = {
