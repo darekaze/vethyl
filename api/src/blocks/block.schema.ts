@@ -6,7 +6,6 @@ export const BlockSchema = new mongoose.Schema({
   parentHash: String,
   nonce: String,
   sha3Uncles: String,
-  logsBloom: String,
   transactionsRoot: String,
   stateRoot: String,
   receiptsRoot: String,
@@ -18,6 +17,7 @@ export const BlockSchema = new mongoose.Schema({
   gasLimit: Number,
   gasUsed: Number,
   timestamp: Number,
+  minedAt: { type: Date, index: true },
   transactions: [String],
   uncles: [String],
 })

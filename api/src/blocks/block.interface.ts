@@ -6,7 +6,6 @@ export interface Block extends Document {
   readonly parentHash: string
   readonly nonce: string
   readonly sha3Uncles: string
-  readonly logsBloom: string | null
   readonly transactionsRoot: string
   readonly stateRoot: string
   readonly receiptsRoot: string
@@ -18,6 +17,7 @@ export interface Block extends Document {
   readonly gasLimit: number
   readonly gasUsed: number
   readonly timestamp: number
+  readonly minedAt: Date
   readonly transactions: string[]
   readonly uncles: string[]
 }

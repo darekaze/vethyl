@@ -4,16 +4,16 @@ export const TransactionSchema = new mongoose.Schema({
   hash: { type: String, unique: true, index: true },
   blockHash: { type: String, index: true },
   blockNumber: { type: Number, index: true },
+  doneAt: { type: Date, index: true },
   from: { type: String, index: true },
   to: { type: String, index: true },
-  doneAt: { type: Date, index: true },
+  value: String,
   gas: Number,
-  gasPrice: Number,
-  input: String,
+  gasPrice: String,
+  gasUsed: Number, // -- receipts
   nonce: Number,
   transactionIndex: Number,
-  r: String,
-  s: String,
-  v: String,
-  value: String,
+  input: String,
+  status: Boolean, // -- receipts
+  contractAddress: String, // -- receipts
 })

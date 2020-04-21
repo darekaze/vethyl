@@ -17,6 +17,7 @@ import { TransactionsModule } from './transactions/txns.module'
         useUnifiedTopology: true,
         useNewUrlParser: true,
         useCreateIndex: true,
+        useFindAndModify: false,
       }),
     }),
     BlocksModule,
