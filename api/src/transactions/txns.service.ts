@@ -19,9 +19,10 @@ export class TransactionsService {
     const start = dayjs(query.start, { utc: true })
     const end = dayjs(query.end || query.start, { utc: true }).add(1, 'day')
 
+    // ENHANCE: find time to refine this part
     return this.txnModel
       .find({
-        from: query.addr,
+        from: query.addr, // ??
         doneAt: {
           $gte: start.toDate(),
           $lt: end.toDate(),

@@ -13,7 +13,9 @@ export class TransactionsController {
   }
 
   @Get('date')
-  async getTransactionsByDate(@Query() query: TxnsByDateDto) {
+  async getTransactionsByDate(
+    @Query() query: TxnsByDateDto,
+  ): Promise<Transaction[]> {
     return this.txnsService.findByDate(query)
   }
 }
