@@ -1,10 +1,10 @@
 {
-  "name": "crawler",
+  "name": "@vethyl/crawler",
   "version": "0.1.0",
-  "description": "Ethereum crawler",
+  "description": "Vethyl Eth crawler",
   "main": "src/index.ts",
   "author": "@darekaze",
-  "license": "Apache-2.0",
+  "license": "BSD-2-Clause",
   "private": true,
   "scripts": {
     "build": "tsc -b",
