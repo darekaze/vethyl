@@ -1,0 +1,19 @@
+{
+  "name": "@vethyl/common",
+  "version": "0.1.0",
+  "description": "Vethyl common library",
+  "main": "index.ts",
+  "author": "@darekaze",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "mongodb": "^3.5.6",
+    "mongoose": "^5.9.9"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.5.6",
+    "@types/mongoose": "^5.7.10",
+    "@types/node": "^12.12.22",
+    "typescript": "~3.8.3"
+  }
+}
