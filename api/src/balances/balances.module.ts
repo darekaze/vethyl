@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
+import { BalanceStateSchema, BalanceRecordSchema } from '@vethyl/common'
 import { BalancesController } from './balances.controller'
 import { BalancesService } from './balances.service'
-import { BalanceStateSchema, BalanceRecordSchema } from './schemas'
 
 @Module({
   imports: [
