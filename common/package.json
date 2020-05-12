@@ -4,7 +4,7 @@
   "description": "Vethyl common library",
   "main": "dist/index.js",
   "author": "@darekaze",
-  "license": "Apache-2.0",
+  "license": "BSD-2-Clause",
   "private": true,
   "scripts": {
     "build": "tsc -b"
