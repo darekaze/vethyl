@@ -2,20 +2,20 @@ import { Model } from 'mongoose'
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import dayjs from 'dayjs'
-import { Transaction } from './txn.interface'
+import { ITransaction } from '@vethyl/common'
 import { TxnsByDateDto } from './dto'
 
 @Injectable()
 export class TransactionsService {
   constructor(
-    @InjectModel('Transaction') private readonly txnModel: Model<Transaction>,
+    @InjectModel('Transaction') private readonly txnModel: Model<ITransaction>,
   ) {}
 
-  async findOneByHash(hash: string): Promise<Transaction> {
+  async findOneByHash(hash: string): Promise<ITransaction> {
     return this.txnModel.findOne({ hash }).exec()
   }
 
-  async findByDate(query: TxnsByDateDto): Promise<Transaction[]> {
+  async findByDate(query: TxnsByDateDto): Promise<ITransaction[]> {
     const start = dayjs(query.start, { utc: true })
     const end = dayjs(query.end || query.start, { utc: true }).add(1, 'day')
 

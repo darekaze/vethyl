@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
+import { TransactionSchema } from '@vethyl/common'
 import { TransactionsController } from './txns.controller'
 import { TransactionsService } from './txns.service'
-import { TransactionSchema } from './txn.schema'
 
 @Module({
   imports: [

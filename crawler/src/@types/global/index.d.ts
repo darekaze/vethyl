@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Model } from 'mongoose'
-import { IBlock, ITransaction, IBalanceState, IBalanceRecord } from '..'
+import { IBlock, ITransaction, IBalanceState, IBalanceRecord } from '@vethyl/common'
 
 // globals
 declare global {

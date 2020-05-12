@@ -2137,6 +2137,12 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
+"@vethyl/common@file:common":
+  version "0.1.0"
+  dependencies:
+    mongodb "^3.5.6"
+    mongoose "^5.9.9"
+
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.8.5.tgz#51b1c5fe6576a34953bf4b253df9f0d490d9e359"

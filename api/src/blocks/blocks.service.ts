@@ -1,17 +1,17 @@
 import { Model } from 'mongoose'
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Block } from './block.interface'
+import { IBlock } from '@vethyl/common'
 
 @Injectable()
 export class BlocksService {
-  constructor(@InjectModel('Block') private readonly blockModel: Model<Block>) {}
+  constructor(@InjectModel('Block') private readonly blockModel: Model<IBlock>) {}
 
-  async findOneByNumber(number: number): Promise<Block> {
+  async findOneByNumber(number: number): Promise<IBlock> {
     return this.blockModel.findOne({ number }).exec()
   }
 
-  async findOneByHash(hash: string): Promise<Block> {
+  async findOneByHash(hash: string): Promise<IBlock> {
     return this.blockModel.findOne({ hash }).exec()
   }
 }

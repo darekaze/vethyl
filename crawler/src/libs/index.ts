@@ -13,24 +13,7 @@ export default async () => {
   Logger.info('✌️ Web3 loaded and connected!')
 
   // Inject mongoose models
-  const models: any[] = [
-    {
-      name: 'BlockModel',
-      model: require('../models/block').default,
-    },
-    {
-      name: 'TxnModel',
-      model: require('../models/transaction').default,
-    },
-    {
-      name: 'BalanceStateModel',
-      model: require('../models/balance-state').default,
-    },
-    {
-      name: 'BalanceRecordModel',
-      model: require('../models/balance-record').default,
-    },
-  ]
+  const models = require('./models').default
 
   await depInjectorLoader(web3Connection, models)
   Logger.info('✌️ Dependency Injector loaded')

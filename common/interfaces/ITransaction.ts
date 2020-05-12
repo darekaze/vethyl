@@ -1,6 +1,6 @@
 import { Document } from 'mongoose'
 
-export interface Transaction extends Document {
+export interface ITransaction extends Document {
   readonly hash: string
   readonly blockHash: string
   readonly blockNumber: number

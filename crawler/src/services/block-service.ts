@@ -1,6 +1,7 @@
 import { Service, Inject } from 'typedi'
 import { Logger } from 'pino'
-import { DbBlock, IBlock } from 'src/@types'
+import { IBlock } from '@vethyl/common'
+import { DbBlock } from 'src/@types'
 import config from '../config'
 
 @Service()

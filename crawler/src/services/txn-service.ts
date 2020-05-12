@@ -1,6 +1,7 @@
 import { Service, Inject } from 'typedi'
 import { Logger } from 'pino'
-import { ITransaction, DbTransaction } from 'src/@types'
+import { ITransaction } from '@vethyl/common'
+import { DbTransaction } from 'src/@types'
 
 @Service()
 export class TxnService {

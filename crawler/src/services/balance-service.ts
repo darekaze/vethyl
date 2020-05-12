@@ -3,11 +3,11 @@ import { Logger } from 'pino'
 import Big from 'big.js'
 import _isArray from 'lodash/isArray'
 import _mergeWith from 'lodash/mergeWith'
+import { IBalanceRecord } from '@vethyl/common'
 import {
   DbBlock,
   DbTransaction,
   DbBalanceRecord,
-  IBalanceRecord,
   ExchangeList,
   BalanceInfo,
   UncleInfo,

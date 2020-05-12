@@ -1,5 +1,2 @@
-export * from './IBlock'
-export * from './ITransaction'
-export * from './IBalanceState'
-export * from './IBalanceRecord'
-export * from './IHelpers'
+export * from './dto'
+export * from './helper'

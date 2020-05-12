@@ -1,6 +1,6 @@
 import { Document } from 'mongoose'
 
-export interface Block extends Document {
+export interface IBlock extends Document {
   readonly number: number
   readonly hash: string
   readonly parentHash: string

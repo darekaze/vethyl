@@ -2,23 +2,23 @@ import { Model } from 'mongoose'
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import dayjs from 'dayjs'
-import { BalanceState, BalanceRecord } from './interfaces'
+import { IBalanceState, IBalanceRecord } from '@vethyl/common'
 import { RecordByDateDto } from './dto'
 
 @Injectable()
 export class BalancesService {
   constructor(
     @InjectModel('BalanceState')
-    private readonly balanceStateModel: Model<BalanceState>,
+    private readonly balanceStateModel: Model<IBalanceState>,
     @InjectModel('BalanceRecord')
-    private readonly balanceRecordModel: Model<BalanceRecord>,
+    private readonly balanceRecordModel: Model<IBalanceRecord>,
   ) {}
 
-  async findOneStateByAddress(address: string): Promise<BalanceState> {
+  async findOneStateByAddress(address: string): Promise<IBalanceState> {
     return this.balanceStateModel.findOne({ address }).exec()
   }
 
-  async findRecordByDate(query: RecordByDateDto): Promise<BalanceRecord[]> {
+  async findRecordByDate(query: RecordByDateDto): Promise<IBalanceRecord[]> {
     const start = dayjs(query.start, { utc: true })
     const end = dayjs(query.end || query.start, { utc: true }).add(1, 'day')
 
