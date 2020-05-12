@@ -2,10 +2,10 @@
   "private": true,
   "name": "vethyl",
   "version": "0.1.0",
-  "description": "Project Vethyl monorepo",
+  "description": "Project vethyl monorepo -- ETH query system",
   "repository": "darekaze/vethyl",
   "author": "@DaRekaze",
-  "license": "Apache-2.0",
+  "license": "BSD-2-Clause",
   "scripts": {
     "_build": "yarn workspaces run build",
     "test": "jest",

@@ -1,9 +1,9 @@
 {
-  "name": "api",
+  "name": "@vethyl/api",
   "version": "0.0.1",
-  "description": "Project Ethan API",
+  "description": "Project vethyl API",
   "author": "@darekaze",
-  "license": "Apache-2.0",
+  "license": "BSD-2-Clause",
   "private": true,
   "scripts": {
     "prebuild": "rimraf dist",
