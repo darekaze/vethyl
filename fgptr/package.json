@@ -1,0 +1,51 @@
+{
+  "name": "@vethyl/fgptr",
+  "version": "0.1.0",
+  "description": "Vethyl fingerprint generator",
+  "main": "src/index.ts",
+  "author": "@darekaze",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "start": "micro dist/index.js -l tcp://0.0.0.0:3022",
+    "dev": "micro-dev tsnode.js -s -p 3022",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@vethyl/common": "file:../common",
+    "big.js": "^5.2.2",
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.15",
+    "micro": "^9.3.4",
+    "micro-cors": "^0.1.1",
+    "mongodb": "^3.5.6",
+    "mongoose": "^5.9.9",
+    "ms": "^2.1.2",
+    "pino": "^6.2.0",
+    "pino-pretty": "^4.0.0",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.8.0",
+    "web3x": "^4.0.6"
+  },
+  "devDependencies": {
+    "@types/big.js": "^4.0.5",
+    "@types/jest": "^25.2.1",
+    "@types/lodash": "^4.14.149",
+    "@types/micro": "^7.3.3",
+    "@types/mongodb": "^3.5.6",
+    "@types/mongoose": "^5.7.10",
+    "@types/ms": "^0.7.31",
+    "@types/node": "^12.12.22",
+    "@types/pino": "^6.0.0",
+    "jest": "^25.3.0",
+    "micro-dev": "^3.0.0",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.8.2",
+    "typescript": "~3.8.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}

@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "ethans",
+  "name": "vethyl",
   "version": "0.1.0",
-  "description": "Project Ethans monorepo -- Making ETH more powerful",
-  "repository": "darekaze/ethans",
+  "description": "Project Vethyl monorepo",
+  "repository": "darekaze/vethyl",
   "author": "@DaRekaze",
   "license": "Apache-2.0",
   "scripts": {
@@ -16,6 +16,7 @@
     "dev:client": "yarn workspace client start",
     "dev:crawler": "yarn workspace crawler dev",
     "dev:api": "yarn workspace api start",
+    "dev:fgptr": "yarn workspace @vethyl/fgptr dev",
     "compose": "docker-compose up -d"
   },
   "devDependencies": {
@@ -41,9 +42,11 @@
   },
   "jest": {
     "projects": [
+      "common",
       "client",
       "crawler",
-      "api"
+      "api",
+      "fgptr"
     ]
   },
   "prettier": {
@@ -67,8 +70,10 @@
     ]
   },
   "workspaces": [
+    "common",
     "client",
     "crawler",
-    "api"
+    "api",
+    "fgptr"
   ]
 }
