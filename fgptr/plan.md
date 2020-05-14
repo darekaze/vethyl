@@ -2,20 +2,20 @@
 
 Ref from crawler directory to create a validation nodejs program
 
-- micro (health checkpoint)
-- node-cron (scheduler)
+- node-cron (scheduler, for generating future fingerprint)
 - sha3 library (create fingerprint)
 - mongoose (to store fingerprint info)
-- web3 ?? (to store fingerprint to testnet?)
+- web3 (to store fingerprints to goerli testnet)
 
-<!-- If there is a limit, need to think of another way (use block range instead?) -->
+<!-- use block range (interval: 1000, dev: 100) -->
 
 some kind of format for mongoose:
 ```
 {
-  date
-  block_from (inclusive)
-  block_to (inclusive)
-  cumulativeHash
+  block_start (inclusive)
+  block_end (inclusive)
+  fingerprint
+  cumulativeFingerprint
+  transactionHash
 }
 ```
