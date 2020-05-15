@@ -26,6 +26,7 @@
     "pino": "^6.2.0",
     "pino-pretty": "^4.0.0",
     "reflect-metadata": "^0.1.13",
+    "sha3": "^2.1.2",
     "typedi": "^0.8.0",
     "web3x": "^4.0.6"
   },
