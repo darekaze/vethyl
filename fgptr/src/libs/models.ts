@@ -1,5 +1,12 @@
 import { model } from 'mongoose'
-import { IBlock, ITransaction, BlockSchema, TransactionSchema } from '@vethyl/common'
+import {
+  IBlock,
+  ITransaction,
+  IFingerprint,
+  BlockSchema,
+  TransactionSchema,
+  FingerprintSchema,
+} from '@vethyl/common'
 
 export default [
   {
@@ -10,14 +17,8 @@ export default [
     name: 'TxnModel',
     model: model<ITransaction>('Transaction', TransactionSchema),
   },
-  // TODO: add fingerprint model here
-  // Ignore balance first
-  // {
-  //   name: 'BalanceStateModel',
-  //   model: model<IBalanceState>('BalanceState', BalanceStateSchema),
-  // },
-  // {
-  //   name: 'BalanceRecordModel',
-  //   model: model<IBalanceRecord>('BalanceRecord', BalanceRecordSchema),
-  // },
+  {
+    name: 'FingerprintModel',
+    model: model<IFingerprint>('Fingerprint', FingerprintSchema),
+  },
 ]

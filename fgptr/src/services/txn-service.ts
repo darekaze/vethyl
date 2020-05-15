@@ -14,11 +14,11 @@ export class TxnService {
       this.logger.trace('Fetching block transactions from %d to %d', start, end)
       const txnRecords = await this.txnModel
         .find({ blockNumber: { $gte: start, $lte: end } })
-        .select('-_id -_v')
+        .select('-_id -__v')
         .exec()
 
       if (!txnRecords) {
-        throw new Error('Error in fetching transactions ')
+        throw new Error('Error in fetching transactions')
       }
 
       return txnRecords

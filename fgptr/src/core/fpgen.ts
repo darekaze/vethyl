@@ -1,52 +1,60 @@
 /* eslint-disable no-await-in-loop */
-import { Eth } from 'web3x/eth'
 import { Container } from 'typedi'
 import { Logger } from 'pino'
-import { BlockService, TxnService } from '../services'
+import { genCurrentFP, genCumulativeFP, signNewTxn } from './helpers'
+import { BlockService, FingerprintService } from '../services'
 import config from '../config'
 
 // Generate fingerprint
 async function fpGenerator() {
   const logger = Container.get<Logger>('logger')
-  const eth = Container.get<Eth>('web3')
   const blockServiceInstance = Container.get(BlockService)
-  const txnServiceInstance = Container.get(TxnService)
-  // const fingerprintServiceInstance = Container.get(FingerprintService)
+  const fingerprintServiceInstance = Container.get(FingerprintService)
   const { blockInterval } = config
 
   try {
-    // TODO: get lastFP
-    const fpHead = -1 // TODO: get fpHead from lastFP
-    const blockHead = await blockServiceInstance.getBlockNumber()
+    const [blockHead, fpHeadInfo] = await Promise.all([
+      blockServiceInstance.getBlockNumber(),
+      fingerprintServiceInstance.getLastestFpInfo(),
+    ])
+    const fpHead = fpHeadInfo.latestNum
+    logger.info('Block head: %d, Fingerprint head: %d', blockHead, fpHead)
 
     // End process if conditions not met
     if (!(fpHead < blockHead && blockHead - fpHead >= blockInterval)) {
-      logger.info('Pending for more blocks to generate new fingerprint')
+      logger.info('Require more blocks to generate new fingerprint')
       return
     }
 
     //* Generate new fingerprint
+    let { cumulativeFingerprint } = fpHeadInfo
+
     for (
-      let from = fpHead + 1;
-      blockHead - from + 1 >= blockInterval;
-      from += blockInterval
+      let blockStart = fpHead + 1;
+      blockHead - blockStart + 1 >= blockInterval;
+      blockStart += blockInterval
     ) {
-      const to = from + blockInterval - 1
+      const blockEnd = blockStart + blockInterval - 1
+      logger.info('Generate fingerprint for %d to %d', blockStart, blockEnd)
 
-      logger.info('Generate fingerprint for %d to %d', from, to)
+      const fingerprint = await genCurrentFP(blockStart, blockEnd)
+      cumulativeFingerprint = genCumulativeFP(cumulativeFingerprint, fingerprint)
 
-      // fetch block and transactions, make into one object
-      // generate hash by sha3-256 with json.stringify
+      /* verify fingerprint info with miner (skip it for now) */
 
-      // if lastFP exist, get latest cumulative fp and form new culFP, else make the fp cul.
+      // Write it as a transaction, sign and send
+      const fpRecord = await signNewTxn({
+        blockStart,
+        blockEnd,
+        fingerprint,
+        cumulativeFingerprint,
+      })
 
-      // verify fingerprint info with miner (skip it for now)
-      // write it as a transaction, sign and send
-
-      // when success, insert records to db
+      // Insert fingerprint to db
+      await fingerprintServiceInstance.insertFingerprint(fpRecord)
     }
     // End process and print next cronjob
-    logger.info('Generator ends')
+    logger.info('Fingerprint Generation ends')
   } catch (err) {
     logger.error('🔥 error: %o', err)
   }
