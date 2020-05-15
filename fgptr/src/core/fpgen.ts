@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { Container } from 'typedi'
 import { Logger } from 'pino'
+import { schedule } from 'node-cron'
 import { genCurrentFP, genCumulativeFP, signNewTxn } from './helpers'
 import { BlockService, FingerprintService } from '../services'
 import config from '../config'
@@ -11,6 +12,8 @@ async function fpGenerator() {
   const blockServiceInstance = Container.get(BlockService)
   const fingerprintServiceInstance = Container.get(FingerprintService)
   const { blockInterval } = config
+
+  logger.info('fpgen: Start: %s', new Date().toISOString())
 
   try {
     const [blockHead, fpHeadInfo] = await Promise.all([
@@ -61,8 +64,12 @@ async function fpGenerator() {
 }
 
 export default async () => {
-  // Run the task once init
-  fpGenerator()
-  // Setup cron to run the task at given time
-  // TODO: set procedure
+  const logger = Container.get<Logger>('logger')
+  const { cronSchedule } = config
+
+  logger.info('fpgen: Initial run')
+  await fpGenerator()
+
+  schedule(cronSchedule, fpGenerator)
+  logger.info('fpgen: Cron scheduled: %s', cronSchedule)
 }

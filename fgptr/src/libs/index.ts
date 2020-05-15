@@ -2,7 +2,7 @@
 import mongooseLoader from './mongoose'
 import web3Loader from './web3'
 import depInjectorLoader from './depInjector'
-import initFingerprinter from '../core/fpgen'
+import runFingerprinter from '../core/fpgen'
 import Logger from './logger'
 
 export default async () => {
@@ -18,6 +18,5 @@ export default async () => {
   await depInjectorLoader(web3Connection, models)
   Logger.info('✌️ Dependency Injector loaded')
 
-  await initFingerprinter()
-  Logger.info('🌶️  Fingerprint generator inited')
+  await runFingerprinter()
 }
