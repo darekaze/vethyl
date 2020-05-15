@@ -231,3 +231,6 @@ nbdist/
 
 ### Eth-node data ###
 /mongodb
+
+### Exclude common lib build ###
+!common/dist

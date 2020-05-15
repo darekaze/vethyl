@@ -13,9 +13,11 @@
     "ws:client": "yarn workspace @vethyl/client",
     "ws:crawler": "yarn workspace @vethyl/crawler",
     "ws:api": "yarn workspace @vethyl/api",
+    "ws:fgptr": "yarn workspace @vethyl/fgptr",
     "dev:client": "yarn workspace @vethyl/client start",
     "dev:crawler": "yarn workspace @vethyl/crawler dev",
     "dev:api": "yarn workspace @vethyl/api start",
+    "dev:fgptr": "yarn workspace @vethyl/fgptr dev",
     "compose": "docker-compose up -d"
   },
   "devDependencies": {
@@ -44,7 +46,8 @@
       "common",
       "client",
       "crawler",
-      "api"
+      "api",
+      "fgptr"
     ]
   },
   "prettier": {
@@ -71,6 +74,7 @@
     "common",
     "client",
     "crawler",
-    "api"
+    "api",
+    "fgptr"
   ]
 }
