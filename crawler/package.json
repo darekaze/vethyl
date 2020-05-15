@@ -2,7 +2,6 @@
   "name": "@vethyl/crawler",
   "version": "0.1.0",
   "description": "Vethyl Eth crawler",
-  "main": "src/index.ts",
   "author": "@darekaze",
   "license": "BSD-2-Clause",
   "private": true,
