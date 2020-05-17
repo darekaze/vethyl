@@ -1,12 +1,11 @@
 import React from 'react'
-import { Container, Header } from 'semantic-ui-react'
+import { Layout } from 'components/Layout'
 
 const EthBlock: React.FC = () => {
   return (
-    <Container text style={{ marginTop: '7em' }}>
-      <Header as="h1">Check Block</Header>
+    <Layout title="Search for Block">
       <p>TBD</p>
-    </Container>
+    </Layout>
   )
 }
 

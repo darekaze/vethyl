@@ -1,66 +1,81 @@
-import React, { useEffect } from 'react'
-import { Container, Header, Form, StrictInputProps } from 'semantic-ui-react'
-import useForm from 'react-hook-form'
-import 'react-day-picker/lib/style.css'
+import React from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { useStoreState } from 'app/hooks'
+import { Layout } from 'components/Layout'
+import {
+  Form,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  HelpBlock,
+  Panel,
+  Button,
+  ButtonToolbar,
+  DateRangePicker,
+} from 'rsuite'
 
-import DateRangePicker from 'components/shared/DateRangePicker'
-import { useStoreState } from '../hooks'
-
-interface FormData {
-  startDate: Date
-  endDate: Date
+interface TxnFormData {
+  dateRange: [Date, Date]
   fromAcct: string
   toAcct: string
-  // // should be number?
-  // valuePeak: string
-  // valueBottom: string
 }
 
 const EthTransaction: React.FC = () => {
-  const { register, handleSubmit, setValue } = useForm<FormData>()
-  const queryResult = useStoreState(state => state.transaction.payload)
+  const { control, handleSubmit } = useForm<TxnFormData>()
+  const queryResult = useStoreState((state) => state.transaction.payload)
 
-  const handleChange: StrictInputProps['onChange'] = (e, { name, value }): void => {
-    setValue(name, value)
+  const onSubmit = (data: any) => {
+    // Call thunk
+    console.log(data)
   }
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
-  })
-
-  useEffect(() => {
-    register({ name: 'startDate' })
-    register({ name: 'endDate' })
-    register({ name: 'fromAcct' })
-    register({ name: 'toAcct' })
-  })
-
   return (
-    <Container text style={{ marginTop: '3rem' }}>
-      <Header as="h1">Check Transaction</Header>
-      <Form onSubmit={onSubmit}>
-        {/* Can put date range picker in one component? */}
-        <Form.Field>
-          <label>Range of Date</label>
-          <DateRangePicker onFormChange={setValue} />
-        </Form.Field>
-        <Form.Group widths="equal">
-          <Form.Input
-            name="fromAcct"
-            label="From Account"
-            placeholder="Enter Sender Account"
-            onChange={handleChange}
-          />
-          <Form.Input
-            name="toAcct"
-            label="To Account"
-            placeholder="Enter Receiver Account"
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Button>Submit</Form.Button>
-      </Form>
-    </Container>
+    <Layout title="Search for Transaction">
+      <Panel bordered>
+        <Form onSubmit={(_, event) => handleSubmit(onSubmit)(event)}>
+          <FormGroup>
+            <ControlLabel>Range of Date</ControlLabel>
+            <Controller
+              as={DateRangePicker}
+              name="dateRange"
+              control={control}
+              defaultValue={[]}
+              placeholder="Transactions occur period"
+              onChange={([dates]) => dates}
+              style={{ width: '300px' }}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <ControlLabel>Sender Account</ControlLabel>
+            <Controller
+              as={FormControl}
+              name="fromAcct"
+              control={control}
+              defaultValue=""
+              placeholder="Sender's address"
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <ControlLabel>Receiver Account</ControlLabel>
+            <Controller
+              as={FormControl}
+              name="toAcct"
+              control={control}
+              defaultValue=""
+              placeholder="Receiver's address"
+            />
+          </FormGroup>
+
+          <ButtonToolbar>
+            <Button appearance="primary" type="submit">
+              Submit
+            </Button>
+          </ButtonToolbar>
+        </Form>
+      </Panel>
+    </Layout>
   )
 }
 
