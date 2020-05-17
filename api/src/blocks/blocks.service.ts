@@ -8,10 +8,10 @@ export class BlocksService {
   constructor(@InjectModel('Block') private readonly blockModel: Model<IBlock>) {}
 
   async findOneByNumber(number: number): Promise<IBlock> {
-    return this.blockModel.findOne({ number }).exec()
+    return this.blockModel.findOne({ number }).select('-_id -__v').exec()
   }
 
   async findOneByHash(hash: string): Promise<IBlock> {
-    return this.blockModel.findOne({ hash }).exec()
+    return this.blockModel.findOne({ hash }).select('-_id -__v').exec()
   }
 }
