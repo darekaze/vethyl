@@ -20,6 +20,7 @@ const NavigationBar: React.FC = () => {
   const handleSelect = (eventKey: string) => {
     setActiveKey(eventKey)
     history.push(`/${eventKey}`)
+    console.log(eventKey)
   }
 
   const handleToggle = () => {
@@ -41,9 +42,14 @@ const NavigationBar: React.FC = () => {
           <span style={{ marginLeft: 12 }}> VQL Client</span>
         </div>
       </Sidenav.Header>
-      <Sidenav expanded={expand} appearance="subtle" style={{ flex: '1 1 auto' }}>
+      <Sidenav
+        expanded={expand}
+        activeKey={activeKey}
+        onSelect={handleSelect}
+        appearance="subtle"
+        style={{ flex: '1 1 auto' }}>
         <Sidenav.Body>
-          <Nav activeKey={activeKey} onSelect={handleSelect}>
+          <Nav>
             <Nav.Item eventKey="" icon={<Icon icon="home" />}>
               Home
             </Nav.Item>
