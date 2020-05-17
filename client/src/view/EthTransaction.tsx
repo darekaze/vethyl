@@ -14,6 +14,7 @@ import {
   DateRangePicker,
 } from 'rsuite'
 import dayjs from 'dayjs'
+import { ResponseCodeBlock } from 'components/ResponseCodeBlock'
 
 interface TxnFormData {
   dateRange: [Date, Date]
@@ -87,7 +88,7 @@ const EthTransaction: React.FC = () => {
           </ButtonToolbar>
         </Form>
       </Panel>
-      <div>{JSON.stringify(queryResult)}</div>
+      <ResponseCodeBlock code={JSON.stringify(queryResult, null, 2)} />
     </Layout>
   )
 }

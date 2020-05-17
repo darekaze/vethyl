@@ -32,6 +32,7 @@ const NavigationBar: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         boxShadow: '0 4px 4px rgba(0,0,0,.12),0 0 10px rgba(0,0,0,.06)',
+        overflowX: 'hidden',
       }}
       width={expand ? 260 : 56}
       collapsible>
