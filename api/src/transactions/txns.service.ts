@@ -19,16 +19,26 @@ export class TransactionsService {
     const start = dayjs(query.start, { utc: true })
     const end = dayjs(query.end || query.start, { utc: true }).add(1, 'day')
 
-    // ENHANCE: find time to refine this part
+    const search: any = {
+      doneAt: {
+        $gte: start.toDate(),
+        $lt: end.toDate(),
+      },
+    }
+
+    if (query.fromAddr) {
+      search.from = query.fromAddr
+    }
+
+    if (query.toAddr) {
+      search.to = query.toAddr
+    }
+
     return this.txnModel
-      .find({
-        from: query.addr, // ??
-        doneAt: {
-          $gte: start.toDate(),
-          $lt: end.toDate(),
-        },
-      })
+      .find(search)
+      .select('-_id -__v')
       .sort({ doneAt: -1 })
+      .limit(100) // limit first
       .exec()
   }
 }

@@ -7,6 +7,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   )
-  await app.listen(3000)
+  app.enableCors()
+  await app.listen(3033)
 }
 bootstrap()

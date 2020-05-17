@@ -3,5 +3,6 @@
 export class TxnsByDateDto {
   readonly start: string
   readonly end?: string
-  readonly addr?: string
+  readonly fromAddr?: string
+  readonly toAddr?: string
 }
