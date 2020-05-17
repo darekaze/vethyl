@@ -2,36 +2,44 @@
 /* eslint-disable no-param-reassign */
 
 import { action, Action, thunk, Thunk } from 'easy-peasy'
+import { ApiResponse } from 'apisauce'
 import api from 'services'
 
 export interface TransactionBody {
   status: string
-  payload: object | null
+  payload: any
+}
+
+export interface TransactionQuery {
+  start: string
+  end?: string
+  fromAddr?: string
+  toAddr?: string
 }
 
 export interface TransactionModel extends TransactionBody {
   setResponse: Action<TransactionModel, TransactionBody>
-  updatePayload: Thunk<TransactionModel, TransactionBody>
+  fetchTransactions: Thunk<TransactionModel, TransactionQuery>
 }
 
 const transaction: TransactionModel = {
   status: '',
-  payload: null,
+  payload: [],
   setResponse: action((state, data) => {
     state.status = data.status
     state.payload = data.payload
   }),
-  updatePayload: thunk(async (actions, reqBody) => {
+  fetchTransactions: thunk(async (actions, query) => {
     try {
-      const { data }: any = await api.post('/transaction', reqBody) // change to my api
-      actions.updatePayload({
+      const { data }: ApiResponse<object[]> = await api.get('/txns/date', query)
+      actions.setResponse({
         status: 'SUCCESS',
         payload: data,
       })
     } catch (err) {
-      actions.updatePayload({
+      actions.setResponse({
         status: 'ERROR',
-        payload: err.response.data,
+        payload: err,
       })
     }
   }),

@@ -9,7 +9,9 @@ export const Layout: React.FC<LayoutProps> = ({ title, children }) => {
   return (
     <Container
       style={{
-        padding: '36px 32px 40px',
+        maxWidth: '1080px',
+        padding: '42px 32px 50px',
+        margin: '0 auto',
         overflowX: 'hidden',
         overflowY: 'auto',
       }}>

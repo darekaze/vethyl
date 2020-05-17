@@ -20,7 +20,6 @@ const NavigationBar: React.FC = () => {
   const handleSelect = (eventKey: string) => {
     setActiveKey(eventKey)
     history.push(`/${eventKey}`)
-    console.log(eventKey)
   }
 
   const handleToggle = () => {
