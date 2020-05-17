@@ -1,13 +1,13 @@
 import React from 'react'
-import { Container, Header } from 'semantic-ui-react'
+import { Layout } from 'components/Layout'
 
 const Home: React.FC = () => {
   return (
-    <Container text style={{ marginTop: '3em' }}>
-      <Header as="h1">VQL-Client</Header>
-      <p>Welcome to use the query client!</p>
-    </Container>
+    <Layout title="Home">
+      <p>Homepage of the VQL Client</p>
+    </Layout>
   )
+  // Add description for usage
 }
 
 export default Home

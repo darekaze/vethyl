@@ -47,7 +47,7 @@ const NavigationBar: React.FC = () => {
         activeKey={activeKey}
         onSelect={handleSelect}
         appearance="subtle"
-        style={{ flex: '1 1 auto' }}>
+        style={{ flex: '1 1 auto', overflowY: 'auto' }}>
         <Sidenav.Body>
           <Nav>
             <Nav.Item eventKey="" icon={<Icon icon="home" />}>
