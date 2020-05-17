@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 
 import { action, Action, thunk, Thunk } from 'easy-peasy'
-import api from '../services'
+import api from 'services'
 
 export interface TransactionBody {
   status: string
@@ -23,7 +23,7 @@ const transaction: TransactionModel = {
   }),
   updatePayload: thunk(async (actions, reqBody) => {
     try {
-      const { data } = await api.post('/transaction', reqBody)
+      const { data }: any = await api.post('/transaction', reqBody) // change to my api
       actions.updatePayload({
         status: 'SUCCESS',
         payload: data,

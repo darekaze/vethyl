@@ -1,18 +1,22 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Home, EthTransaction, EthBlock, EthBalance } from '../view'
+// import { Home, EthTransaction, EthBlock, EthBalance } from 'view'
+import { Home } from 'view'
 
 const Routes: React.FC = () => {
   return (
     <Switch>
       <Route path="/tx">
-        <EthTransaction />
+        {/* <EthTransaction /> */}
+        <Home />
       </Route>
       <Route path="/block">
-        <EthBlock />
+        {/* <EthBlock /> */}
+        <Home />
       </Route>
       <Route path="/balance">
-        <EthBalance />
+        {/* <EthBalance /> */}
+        <Home />
       </Route>
       <Route path="/">
         <Home />

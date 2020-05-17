@@ -1,16 +1,20 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { StoreProvider } from 'easy-peasy'
-import NavigationBar from './NavigationBar'
-import Routes from './Routes'
+import { Container } from 'rsuite'
+
+import Navi from './nav/Navi'
+import Routes from './nav/Routes'
 import store from './store'
 
 const App: React.FC = () => {
   return (
     <StoreProvider store={store}>
       <Router>
-        <NavigationBar />
-        <Routes />
+        <Container>
+          <Navi />
+          <Routes />
+        </Container>
       </Router>
     </StoreProvider>
   )
