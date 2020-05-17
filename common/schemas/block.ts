@@ -9,7 +9,7 @@ export const BlockSchema = new mongoose.Schema({
   transactionsRoot: String,
   stateRoot: String,
   receiptsRoot: String,
-  miner: String,
+  miner: { type: String, index: true },
   difficulty: String,
   totalDifficulty: String,
   extraData: String,

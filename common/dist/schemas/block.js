@@ -13,7 +13,7 @@ exports.BlockSchema = new mongoose_1.default.Schema({
     transactionsRoot: String,
     stateRoot: String,
     receiptsRoot: String,
-    miner: String,
+    miner: { type: String, index: true },
     difficulty: String,
     totalDifficulty: String,
     extraData: String,
