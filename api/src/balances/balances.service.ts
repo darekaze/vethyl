@@ -15,7 +15,7 @@ export class BalancesService {
   ) {}
 
   async findOneStateByAddress(address: string): Promise<IBalanceState> {
-    return this.balanceStateModel.findOne({ address }).exec()
+    return this.balanceStateModel.findOne({ address }).select('-_id -__v').exec()
   }
 
   async findRecordByDate(query: RecordByDateDto): Promise<IBalanceRecord[]> {
@@ -32,6 +32,7 @@ export class BalancesService {
         },
       })
       .sort({ time: -1 })
+      .select('-_id -__v')
       .exec()
   }
 }

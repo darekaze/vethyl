@@ -1,6 +1,12 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Home, EthTransaction, EthBlock, EthBalance } from 'view'
+import {
+  Home,
+  EthTransaction,
+  EthBlock,
+  GetEthBalanceState,
+  GetEthBalanceRecord,
+} from 'view'
 
 const Routes: React.FC = () => {
   return (
@@ -11,8 +17,11 @@ const Routes: React.FC = () => {
       <Route path="/block">
         <EthBlock />
       </Route>
-      <Route path="/balance">
-        <EthBalance />
+      <Route path="/balance-state">
+        <GetEthBalanceState />
+      </Route>
+      <Route path="/balance-record">
+        <GetEthBalanceRecord />
       </Route>
       <Route path="/">
         <Home />

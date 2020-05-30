@@ -1,6 +1,6 @@
-import React, { useState, CSSProperties } from 'react'
-import { useHistory } from 'react-router-dom'
-import { Sidebar, Sidenav, Nav, Navbar, Icon } from 'rsuite'
+import React, { useState, useEffect, CSSProperties } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
+import { Sidebar, Sidenav, Nav, Navbar, Icon, Dropdown } from 'rsuite'
 
 const headerStyles: CSSProperties = {
   padding: 18,
@@ -16,10 +16,15 @@ const NavigationBar: React.FC = () => {
   const [activeKey, setActiveKey] = useState('')
   const [expand, setExpand] = useState(true)
   const history = useHistory()
+  const location = useLocation()
+
+  useEffect(() => {
+    setActiveKey(location.pathname)
+  }, [])
 
   const handleSelect = (eventKey: string) => {
     setActiveKey(eventKey)
-    history.push(`/${eventKey}`)
+    history.push(eventKey)
   }
 
   const handleToggle = () => {
@@ -50,19 +55,25 @@ const NavigationBar: React.FC = () => {
         style={{ flex: '1 1 auto', overflowY: 'auto' }}>
         <Sidenav.Body>
           <Nav>
-            <Nav.Item eventKey="" icon={<Icon icon="home" />}>
+            <Nav.Item eventKey="/" icon={<Icon icon="home" />}>
               Home
             </Nav.Item>
-            <Nav.Item eventKey="tx" icon={<Icon icon="exchange" />}>
+            <Nav.Item eventKey="/tx" icon={<Icon icon="exchange" />}>
               Transaction
             </Nav.Item>
-            <Nav.Item eventKey="block" icon={<Icon icon="link" />}>
+            <Nav.Item eventKey="/block" icon={<Icon icon="link" />}>
               Block
             </Nav.Item>
-            <Nav.Item eventKey="balance" icon={<Icon icon="money" />}>
-              Balance
-            </Nav.Item>
-            {/* <Nav.Item eventKey="mobility" icon={<Icon icon="bicycle" />}>
+            <Dropdown
+              eventKey="balance"
+              title="Balance"
+              icon={<Icon icon="money" />}>
+              <Dropdown.Item eventKey="/balance-state">Check Balance</Dropdown.Item>
+              <Dropdown.Item eventKey="/balance-record">
+                Check Balance Records
+              </Dropdown.Item>
+            </Dropdown>
+            {/* <Nav.Item eventKey="/mobility" icon={<Icon icon="bicycle" />}>
               Mobility
             </Nav.Item> */}
           </Nav>
