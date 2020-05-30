@@ -11,32 +11,37 @@ services:
       - 27017:27017
     volumes:
       - ./mongodb:/data/db
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
   # redis:
   #   image: redis
   #   container_name: vethyl_redis
   #   restart: on-failure
   #   ports:
   #     - "6377:6379"
-  proxy:
-    image: dockercloud/haproxy
-    depends_on:
-      - api
-    environment:
-      - BALANCE=leastconn
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 80:80
-    deploy:
-      placement:
-        constraints: [node.role == manager]
+  # proxy:
+  #   image: dockercloud/haproxy
+  #   depends_on:
+  #     - api
+  #   environment:
+  #     - BALANCE=leastconn
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   ports:
+  #     - 80:80
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
 
   ### Build images ###
   api:
     image: vethyl/api
     container_name: vethyl_api
+    restart: on-failure
     ports:
-      - 8080:8080 #! change to only 8080
+      - 8080:8080 #? questionable
     build:
       context: .
       dockerfile: .docker/api.Dockerfile
@@ -70,6 +75,13 @@ services:
       - NODE_ENV=${ENV-production}
     depends_on:
       - mongodb
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   fgptr:
     image: vethyl/fgptr
@@ -86,3 +98,10 @@ services:
       - NODE_ENV=${ENV-production}
     depends_on:
       - mongodb
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
