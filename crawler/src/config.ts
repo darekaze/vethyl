@@ -13,6 +13,6 @@ if (!envFound) {
 export default {
   web3Url: process.env.WEB3_URL,
   dbUrl: process.env.DB_URL,
-  syncInterval: ms(process.env.SYNC_INTERVAL || '18s'),
-  blockStart: parseInt(process.env.BLOCK_START || '9200000', 10), // change to 0 after
+  syncInterval: ms(process.env.SYNC_INTERVAL || '15s'),
+  blockStart: parseInt(process.env.BLOCK_START || '0', 10),
 }
