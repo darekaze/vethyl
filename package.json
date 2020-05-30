@@ -22,6 +22,8 @@
     "build:api": "docker-compose build api",
     "build:crawler": "docker-compose build crawler",
     "build:fgptr": "docker-compose build fgptr",
+    "deploy": "docker stack deploy --compose-file=docker-compose.yml prod",
+    "stopall": "docker stack rm prod",
     "rmi": "docker rmi $(docker images -q --filter \"dangling=true\")"
   },
   "devDependencies": {
