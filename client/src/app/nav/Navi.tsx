@@ -20,7 +20,7 @@ const NavigationBar: React.FC = () => {
 
   useEffect(() => {
     setActiveKey(location.pathname)
-  }, [])
+  }, [location])
 
   const handleSelect = (eventKey: string) => {
     setActiveKey(eventKey)
