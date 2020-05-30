@@ -1,11 +1,5 @@
 version: "3"
 services:
-  redis:
-    image: redis
-    container_name: vethyl_redis
-    restart: on-failure
-    ports:
-      - "6377:6379"
   mongodb:
     image: mongo:4.2.2-bionic
     container_name: vethyl_mongodb
@@ -17,3 +11,78 @@ services:
       - 27017:27017
     volumes:
       - ./mongodb:/data/db
+  # redis:
+  #   image: redis
+  #   container_name: vethyl_redis
+  #   restart: on-failure
+  #   ports:
+  #     - "6377:6379"
+  proxy:
+    image: dockercloud/haproxy
+    depends_on:
+      - api
+    environment:
+      - BALANCE=leastconn
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  ### Build images ###
+  api:
+    image: vethyl/api
+    container_name: vethyl_api
+    ports:
+      - 8080:8080 #! change to only 8080
+    build:
+      context: .
+      dockerfile: .docker/api.Dockerfile
+    environment:
+      - NODE_ENV=${ENV-production}
+      - SERVICE_PORTS=8080
+    depends_on:
+      - mongodb
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+
+  crawler:
+    image: vethyl/crawler
+    container_name: vethyl_syncManager
+    restart: on-failure
+    ports:
+      - 3007:3007
+    build:
+      context: .
+      dockerfile: .docker/crawler.Dockerfile
+    env_file:
+      - .environment/crawler.${ENV-production}.env
+    environment:
+      - NODE_ENV=${ENV-production}
+    depends_on:
+      - mongodb
+
+  fgptr:
+    image: vethyl/fgptr
+    container_name: vethyl_verify
+    restart: on-failure
+    ports:
+      - 3022:3022
+    build:
+      context: .
+      dockerfile: .docker/fgptr.Dockerfile
+    env_file:
+      - .environment/fgptr.${ENV-production}.env
+    environment:
+      - NODE_ENV=${ENV-production}
+    depends_on:
+      - mongodb

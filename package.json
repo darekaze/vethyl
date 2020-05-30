@@ -11,14 +11,18 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "ws:client": "yarn workspace @vethyl/client",
-    "ws:crawler": "yarn workspace @vethyl/crawler",
     "ws:api": "yarn workspace @vethyl/api",
+    "ws:crawler": "yarn workspace @vethyl/crawler",
     "ws:fgptr": "yarn workspace @vethyl/fgptr",
     "dev:client": "yarn workspace @vethyl/client start",
-    "dev:crawler": "yarn workspace @vethyl/crawler dev",
     "dev:api": "yarn workspace @vethyl/api start",
+    "dev:crawler": "yarn workspace @vethyl/crawler dev",
     "dev:fgptr": "yarn workspace @vethyl/fgptr dev",
-    "compose": "docker-compose up -d"
+    "compose": "docker-compose up -d",
+    "build:api": "docker-compose build api",
+    "build:crawler": "docker-compose build crawler",
+    "build:fgptr": "docker-compose build fgptr",
+    "rmi": "docker rmi $(docker images -q --filter \"dangling=true\")"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.26.0",

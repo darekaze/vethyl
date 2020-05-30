@@ -15,7 +15,7 @@ dist/
 
 # misc
 .DS_Store
-.environment/*.prod.env
+.environment/*.production.env
 
 logs
 *.log
