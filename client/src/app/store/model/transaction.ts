@@ -31,7 +31,7 @@ const transaction: TransactionModel = {
   }),
   fetchTransactions: thunk(async (actions, query) => {
     try {
-      const { data }: ApiResponse<object[]> = await api.get('/txns/date', query)
+      const { data }: ApiResponse<object> = await api.get('/txns/date', query)
       actions.setResponse({
         status: 'SUCCESS',
         payload: data,
