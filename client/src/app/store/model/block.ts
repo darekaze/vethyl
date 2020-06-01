@@ -30,13 +30,7 @@ const block: BlockModel = {
     if (!payload.query) return
 
     try {
-      const { query } = payload
-      let endpoint = `/blocks/${query}`
-      if (query.includes('0x')) {
-        endpoint = `/blocks/hash/${query}`
-      }
-
-      const { data }: ApiResponse<object> = await api.get(endpoint)
+      const { data }: ApiResponse<object> = await api.get(`/blocks/${payload.query}`)
       actions.setResponse({
         status: 'SUCCESS',
         payload: data,

@@ -4,8 +4,8 @@ import apiMonitor from './monitor'
 const api = create({
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? 'http://localhost:8080' // change for prod deployment
-      : 'http://localhost:8080',
+      ? 'http://127.0.0.1:8080' // change for prod deployment
+      : 'http://127.0.0.1:8080',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json; charset=utf-8',
