@@ -10,6 +10,10 @@ export class FingerprintService {
     @InjectModel('Fingerprint') private readonly fpModel: Model<IFingerprint>,
   ) {}
 
+  async findLatest(): Promise<IFingerprint> {
+    return this.fpModel.findOne().sort('-blockEnd').exec()
+  }
+
   async findOneByNumber(blockNum: number): Promise<IFingerprint> {
     return this.fpModel
       .findOne({ blockStart: { $lte: blockNum }, blockEnd: { $gte: blockNum } })
@@ -25,10 +29,18 @@ export class FingerprintService {
       return [await this.findOneByNumber(start)]
     }
 
-    const [firstFp, lastFp] = await Promise.all([
+    // eslint-disable-next-line prefer-const
+    let [firstFp, lastFp] = await Promise.all([
       this.findOneByNumber(start),
       this.findOneByNumber(end),
     ])
+
+    if (!firstFp) {
+      return null
+    }
+    if (!lastFp) {
+      lastFp = await this.findLatest()
+    }
 
     return this.fpModel
       .find({
