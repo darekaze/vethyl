@@ -14,4 +14,13 @@ export class BlocksService {
   async findOneByHash(hash: string): Promise<IBlock> {
     return this.blockModel.findOne({ hash }).select('-_id -__v').exec()
   }
+
+  async findByRange(start: number, end: number): Promise<IBlock[]> {
+    return this.blockModel
+      .find({
+        number: { $gte: start, $lte: end },
+      })
+      .select('-_id -__v')
+      .exec()
+  }
 }
