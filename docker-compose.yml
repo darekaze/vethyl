@@ -21,19 +21,19 @@ services:
   #   restart: on-failure
   #   ports:
   #     - "6377:6379"
-  # proxy:
-  #   image: dockercloud/haproxy
-  #   depends_on:
-  #     - api
-  #   environment:
-  #     - BALANCE=leastconn
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   ports:
-  #     - 80:80
-  #   deploy:
-  #     placement:
-  #       constraints: [node.role == manager]
+  proxy:
+    image: dockercloud/haproxy
+    depends_on:
+      - api
+    environment:
+      - BALANCE=leastconn
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
   ### Build images ###
   api:

@@ -49,6 +49,7 @@ const NavigationBar: React.FC = () => {
       </Sidenav.Header>
       <Sidenav
         expanded={expand}
+        openKeys={['blocks', 'balance']}
         activeKey={activeKey}
         onSelect={handleSelect}
         appearance="subtle"
@@ -61,9 +62,10 @@ const NavigationBar: React.FC = () => {
             <Nav.Item eventKey="/tx" icon={<Icon icon="exchange" />}>
               Transaction
             </Nav.Item>
-            <Nav.Item eventKey="/block" icon={<Icon icon="link" />}>
-              Block
-            </Nav.Item>
+            <Dropdown eventKey="blocks" title="Block" icon={<Icon icon="link" />}>
+              <Dropdown.Item eventKey="/block">Get Block</Dropdown.Item>
+              <Dropdown.Item eventKey="/block-range">Get Range Block</Dropdown.Item>
+            </Dropdown>
             <Dropdown
               eventKey="balance"
               title="Balance"

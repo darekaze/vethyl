@@ -18,7 +18,7 @@ interface BlockFormData {
   block: string
 }
 
-const EthBlock: React.FC = () => {
+export const GetEthBlock: React.FC = () => {
   const { control, handleSubmit } = useForm<BlockFormData>()
   const queryResult = useStoreState((state) => state.block.payload)
   const fetchBlock = useStoreActions((actions) => actions.block.fetchBlock)
@@ -57,5 +57,3 @@ const EthBlock: React.FC = () => {
     </Layout>
   )
 }
-
-export default EthBlock

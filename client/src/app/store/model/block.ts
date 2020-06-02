@@ -14,9 +14,15 @@ export interface BlockQuery {
   query: string
 }
 
+export interface RangeBlockQuery {
+  start: number
+  end: number
+}
+
 export interface BlockModel extends BlockBody {
   setResponse: Action<BlockModel, BlockBody>
   fetchBlock: Thunk<BlockModel, BlockQuery>
+  fetchRangeBlocks: Thunk<BlockModel, RangeBlockQuery>
 }
 
 const block: BlockModel = {
@@ -30,13 +36,23 @@ const block: BlockModel = {
     if (!payload.query) return
 
     try {
-      const { query } = payload
-      let endpoint = `/blocks/${query}`
-      if (query.includes('0x')) {
-        endpoint = `/blocks/hash/${query}`
-      }
+      const { data }: ApiResponse<object> = await api.get(`/blocks/${payload.query}`)
+      actions.setResponse({
+        status: 'SUCCESS',
+        payload: data,
+      })
+    } catch (err) {
+      actions.setResponse({
+        status: 'ERROR',
+        payload: err,
+      })
+    }
+  }),
+  fetchRangeBlocks: thunk(async (actions, payload) => {
+    if (!payload.start || !payload.end) return
 
-      const { data }: ApiResponse<object> = await api.get(endpoint)
+    try {
+      const { data }: ApiResponse<object> = await api.get('/blocks/range', payload)
       actions.setResponse({
         status: 'SUCCESS',
         payload: data,

@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router-dom'
 import {
   Home,
   EthTransaction,
-  EthBlock,
+  GetEthBlock,
+  GetEthRangeBlock,
   GetEthBalanceState,
   GetEthBalanceRecord,
 } from 'view'
@@ -15,7 +16,10 @@ const Routes: React.FC = () => {
         <EthTransaction />
       </Route>
       <Route path="/block">
-        <EthBlock />
+        <GetEthBlock />
+      </Route>
+      <Route path="/block-range">
+        <GetEthRangeBlock />
       </Route>
       <Route path="/balance-state">
         <GetEthBalanceState />
