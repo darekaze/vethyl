@@ -8,7 +8,7 @@ Vethyl -- A full-stack system for quering verifiable Ethreum data
 This monorepo consists of 5 components:
 
 - [`api`](./api/README.md) -- Query Service
-- [`scraper`](./client/README.md) -- Frontend of the client
+- [`client`](./client/README.md) -- Frontend of the client
 - `common` -- shared codes between components
 - `crawler` -- Blockchain-Ethereum Sync Manager
 - `fgptr` -- Data Validation service (fingerprint generator)
